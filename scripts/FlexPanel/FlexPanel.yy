@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"FlexPanel",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"FlexPanel",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/Objects/Misc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
