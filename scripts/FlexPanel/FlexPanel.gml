@@ -4,6 +4,16 @@ function window(struct) constructor {
 	instances = [];
 	recalculate();
 	
+	static edit_mode = function(boolean) {
+		for (var i = 0; i < array_length(instances); ++i) {
+		    instances[i].editable = boolean;
+		}
+	}
+	
+	static get_child = function(node) {
+		return flexpanel_node_get_child(root, node)
+	}
+	
 	static generate_instance = function(_node, _depth) {
 		// Get layout data
 		var _pos = flexpanel_node_layout_get_position(_node, false);
@@ -11,6 +21,7 @@ function window(struct) constructor {
 	
 		// Update instance
 		var _data = flexpanel_node_get_data(_node);
+		_data.owner = self;
 		if ((struct_exists(_data, "inst") and (is_string(_data.inst) or !instance_exists(_data.inst))) or !struct_exists(_data, "inst"))
 		{
 			// Create instance
