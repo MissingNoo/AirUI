@@ -39,39 +39,64 @@ if (element != undefined) {
 
 if (global.edit_mode) {
     if (mouse_in_area_gui([x, y, x + width, y + height])) {
-		if (resizing == noone and (global.edit_node == undefined or global.edit_node != name and type == "panel")) {
+		if (global.edit_node != name and type == "panel") {
 			global.edit_node = name;
         }
-		if (resizing == noone and data.owner != "editor_base" and (global.edit_element == undefined or global.edit_element != name)) {
+		if (global.edit_element != name and type != "panel") {
+			global.edit_element = name;
+        }
+		if (resizing == noone and (edit_node == undefined or edit_node != name and type == "panel")) {
+			edit_node = name;
+        }
+		if (resizing == noone and data.owner != "editor_base" and (edit_element == undefined or edit_element != name)) {
 			if (type == "panel") {
 				if (keyboard_check(vk_insert)) {
-				    global.edit_element = name;
+				    edit_element = name;
 				}			    
 			}
 			else {
-				global.edit_element = name;
-			}
-			
+				edit_element = name;
+			}			
         }
 	}
     
     var can_drag_panel = false;
     var panel = undefined;
-    if (global.edit_node != undefined) {
-    	panel = flexpanel_node_get_child(oUI.n_root, global.edit_node);
-    	pp = flexpanel_node_get_child(oEditableUI.n_root, global.edit_node);
-		if (pp != undefined and flexpanel_node_get_num_children(pp) == 0) {
-		    global.edit_element = name;
+    if (edit_node != undefined) {
+    	panel = flexpanel_node_get_child(oUI.n_root, edit_node);
+    	pp = flexpanel_node_get_child(oEditableUI.n_root, edit_node);
+		if (pp != undefined) {
+		    edit_element = name;
 		}
     }
 	
-    if (global.edit_element != undefined and data.owner != "editor_base") {
-    	var ele = flexpanel_node_get_child(oEditableUI.n_root, global.edit_element);
+	if ((global.edit_node != undefined or global.edit_element != undefined) and data.owner != "editor_base") {
+		var v = global.edit_node;
+		if (global.edit_node == undefined) {
+		    v = global.edit_element;
+		}
+	    var ele = flexpanel_node_get_child(oEditableUI.n_root, v);
 		if (device_mouse_check_button_released(0, mb_middle) and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
 			deltimer = 60;
 			flexpanel_node_style_set_flex(ele, !flexpanel_node_style_get_flex(ele));
+			if (type == "panel") {
+				show_message_async(flexpanel_node_style_get_flex_direction(ele));
+				switch (flexpanel_node_style_get_flex_direction(ele)) {
+				    case "row":
+				        flexpanel_node_style_set_flex_direction(ele, "column");
+				        break;
+				    case "column":
+				        flexpanel_node_style_set_flex_direction(ele, "row");
+				        break;
+				}
+			    
+			}
 			oEditableUI.recalculate();
 		}
+	}
+	
+    if (edit_element != undefined and data.owner != "editor_base") {
+    	var ele = flexpanel_node_get_child(oEditableUI.n_root, edit_element);
 		#region delete
 		if (keyboard_check_released(vk_delete) and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
 			deltimer = 60;
@@ -151,7 +176,7 @@ if (global.edit_mode) {
 				draw_set_color(c_white);
 			}
 			if (resizing != noone and device_mouse_check_button_released(0, mb_left)) {
-				global.edit_element = undefined;
+				edit_element = undefined;
 				resizing = noone;
 				oEditableUI.recalculate();
 			}
@@ -182,14 +207,15 @@ if (global.edit_mode) {
 	    draw_text(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), type);
 	}
 	
-	if (dragging and device_mouse_check_button_released(0, mb_left) and global.edit_node != undefined) {
+	if (dragging and device_mouse_check_button_released(0, mb_left) and edit_node != undefined) {
 		dragging = false;
+		oEditableUI.edit_node = edit_node;
 	    oEditableUI.node = type;
 	}
 	
-	if (global.edit_node == name ) {
+	if (edit_node == name ) {
 	    draw_set_color(c_red);
-	} else if (global.edit_element == name) {
+	} else if (edit_element == name) {
 		draw_set_color(c_green);
 	} else {
 		draw_set_color(c_white);

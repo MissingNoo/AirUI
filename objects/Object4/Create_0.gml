@@ -1,0 +1,1 @@
+ui = new window(global.player_info_ui);

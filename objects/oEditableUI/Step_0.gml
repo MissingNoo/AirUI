@@ -27,6 +27,7 @@ if (keyboard_check_released(vk_numpad5)) {
 if (global.edit_node != undefined and node != undefined and !is_string(node)) {
 	//creating = false;
 	var panel = flexpanel_node_get_child(n_root, global.edit_node);
+	show_message($"{edit_node} : {panel}");
     if (panel == undefined) {
     	exit;
     }

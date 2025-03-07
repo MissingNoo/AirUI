@@ -1,3 +1,5 @@
+edit_node = undefined;
+edit_element = undefined;
 resizing = noone;
 deltimer = 10;
 draw_back = false;

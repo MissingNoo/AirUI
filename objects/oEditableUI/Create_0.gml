@@ -1,4 +1,5 @@
 randomize();
+edit_node = undefined;
 node = undefined;
 creating = false;
 str = {
