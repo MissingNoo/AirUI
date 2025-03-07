@@ -1,5 +1,5 @@
 str = {
-  "name":"editor_base",
+  "name":"editor",
   "flex":1.0,
   "padding":0.0,
   "width":1920.0,
@@ -9,6 +9,7 @@ str = {
   "height":1080.0,
     flexDirection : "row",
   "nodes":[
+  {flex : 1, flexGrow: 1},
     {
     name : "panel_side",
     flex : 0.15,
@@ -60,13 +61,8 @@ nodes : [
     }
     ]
     },
-    {flex : 1, flexGrow: 1},
+    
 
   ]
 }
-/**/
-n_root = flexpanel_create_node(str);
-target_w = display_get_gui_width();
-target_h = display_get_gui_height();
-flexpanel_calculate_layout(n_root, target_w, target_h, flexpanel_direction.RTL);
-generate_instance(n_root, 0, str[$ "name"]);
+ui = new window(str);

@@ -1,12 +1,17 @@
 global.edit_mode = false;
+global.edit_node = undefined;
+global.edit_node_owner = undefined;
 function window(struct) constructor {
+	ownername = struct[$ "name"];
 	root = flexpanel_create_node(struct);
 	instances = [];
+	editing = false;
 	recalculate();
 	
-	static edit_mode = function(boolean) {
+	static edit_mode = function() {
+		editing = !editing;
 		for (var i = 0; i < array_length(instances); ++i) {
-		    instances[i].editable = boolean;
+		    instances[i].editable = editing;
 		}
 	}
 	
@@ -18,6 +23,9 @@ function window(struct) constructor {
 		// Get layout data
 		var _pos = flexpanel_node_layout_get_position(_node, false);
 		var _name = flexpanel_node_get_name(_node);
+		if (_name == undefined) {
+		    flexpanel_node_set_name(_node, irandom(999999));
+		}
 	
 		// Update instance
 		var _data = flexpanel_node_get_data(_node);
@@ -30,7 +38,8 @@ function window(struct) constructor {
 				name: _name,
 				width: _pos.width,
 				height: _pos.height,
-	            data: _data
+	            data: _data,
+				editable : editing
 			});
 	
 			_data.inst = _inst;
@@ -43,6 +52,7 @@ function window(struct) constructor {
 			_inst.y = _pos.top;
 			_inst.width = _pos.width;
 			_inst.height = _pos.height;
+			_inst.editable = editing;
 	        _inst.data = _data;
 			with (_inst) {
 				event_perform(ev_create, 0);
@@ -98,6 +108,7 @@ global.player_info_ui = {
 		flexDirection : "column",
 		nodes : [
 		{ // Main Area
+			name : "main_panel",
 			flex : 1,
 			flexDirection : "row",
 			nodes : [

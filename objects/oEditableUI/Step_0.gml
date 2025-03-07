@@ -1,5 +1,9 @@
 /// @description Insert description here
 // You can write your code in this editor
+if (keyboard_check(vk_delete)) {
+    //show_message(ui.get_element_data("button_play", "text"));
+	ui.edit_mode(true);
+}
 
 switch (node) {
     case "panel":
@@ -26,14 +30,13 @@ if (keyboard_check_released(vk_numpad5)) {
 
 if (global.edit_node != undefined and node != undefined and !is_string(node)) {
 	//creating = false;
-	var panel = flexpanel_node_get_child(n_root, global.edit_node);
-	show_message($"{edit_node} : {panel}");
+	var panel = flexpanel_node_get_child(ui.root, global.edit_node);
+	//show_message($"{edit_node} : {panel}");
     if (panel == undefined) {
     	exit;
     }
 	flexpanel_node_insert_child(panel, node, 0);
-    flexpanel_calculate_layout(n_root, target_w, target_h, flexpanel_direction.LTR);
-	generate_instance(n_root, 0);
+    ui.recalculate();
 	node = undefined;
 }
 if (keyboard_check_released(vk_home)) {
@@ -42,13 +45,7 @@ if (keyboard_check_released(vk_home)) {
 	file_text_close(f);
 }
 if (keyboard_check_released(vk_end)) {
-	with (oUIElement) {
-	    if (data.owner != "editor_base") {
-		    instance_destroy();
-		}
-	}
-	n_root = flexpanel_create_node(buffer_read(buffer_load("test"), buffer_string));
-    flexpanel_calculate_layout(n_root, target_w, target_h, flexpanel_direction.LTR);
-	generate_instance(n_root, 0);
+	ui.dispose();
+	ui = new window(flexpanel_create_node(buffer_read(buffer_load("test"), buffer_string)));
 }
 

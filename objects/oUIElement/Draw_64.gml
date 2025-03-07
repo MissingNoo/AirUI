@@ -37,11 +37,46 @@ if (element != undefined) {
     element.draw();
 }
 
+if (data.owner == oUI.ui) {
+	if (mouse_in_area_gui([x, y, x + width, y + height])) {
+		if (edit_node != name and type == "panel") {
+			edit_node = name;
+        }
+	}
+	var can_drag_panel = false;
+    var panel = undefined;
+    if (edit_node != undefined) {
+    	panel = flexpanel_node_get_child(oUI.ui.root , edit_node);
+		if (panel != undefined) {
+		    can_drag_panel = flexpanel_node_get_num_children(panel) == 0;
+		}
+    }
+	
+	if (mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_pressed(0, mb_left)) {
+        dragging = true;
+        if (type == "panel" and !can_drag_panel) {
+        	dragging = false;
+        }
+	}
+
+	if (dragging) {
+	    draw_text(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), type);
+	}
+	
+	if (dragging and device_mouse_check_button_released(0, mb_left) and global.edit_node != undefined) {
+		dragging = false;
+		oEditableUI.edit_node = edit_node;
+	    oEditableUI.node = type;
+	}
+}
+
 if (editable) {
-    //if (mouse_in_area_gui([x, y, x + width, y + height])) {
-	//	if (global.edit_node != name and type == "panel") {
-	//		global.edit_node = name;
-    //    }
+	if (mouse_in_area_gui([x, y, x + width, y + height])) {
+		if (global.edit_node != name and type == "panel") {
+			global.edit_node = name;
+			global.edit_node_owner = data.owner;
+        }
+	}
 	//	if (global.edit_element != name and type != "panel") {
 	//		global.edit_element = name;
     //    }
@@ -60,15 +95,7 @@ if (editable) {
     //    }
 	//}
     
-    //var can_drag_panel = false;
-    //var panel = undefined;
-    //if (edit_node != undefined) {
-    //	panel = flexpanel_node_get_child(oUI.n_root, edit_node);
-    //	pp = flexpanel_node_get_child(oEditableUI.n_root, edit_node);
-	//	if (pp != undefined) {
-	//	    edit_element = name;
-	//	}
-    //}
+    
 	
 	//if ((global.edit_node != undefined or global.edit_element != undefined) and data.owner != "editor_base") {
 	//	var v = global.edit_node;
@@ -196,31 +223,11 @@ if (editable) {
     //	can_drag_panel = true;
     //}
     
-	//if (data.owner == "editor_base" and mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_pressed(0, mb_left)) {
-    //    dragging = true;
-    //    if (type == "panel" and !can_drag_panel) {
-    //    	dragging = false;
-    //    }
-	//}
-
-	//if (dragging) {
-	//    draw_text(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), type);
-	//}
-	
-	//if (dragging and device_mouse_check_button_released(0, mb_left) and edit_node != undefined) {
-	//	dragging = false;
-	//	oEditableUI.edit_node = edit_node;
-	//    oEditableUI.node = type;
-	//}
-	
-	//if (edit_node == name ) {
-	//    draw_set_color(c_red);
-	//} else if (edit_element == name) {
-	//	draw_set_color(c_green);
-	//} else {
-	//	draw_set_color(c_white);
-	//}
+	var _color = "[c_blue]";
+	if (global.edit_node == name ) {
+	    _color = "[c_red]";
+	}
     draw_rectangle(x, y, x + width, y + height, 1);
-	scribble($"[c_blue][fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
+	scribble($"{_color}[fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
 	draw_set_color(c_white);
 }
