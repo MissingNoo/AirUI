@@ -1,3 +1,4 @@
+original_depth = depth;
 edit_node = undefined;
 edit_element = undefined;
 resizing = noone;

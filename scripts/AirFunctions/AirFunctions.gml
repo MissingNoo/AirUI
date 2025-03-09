@@ -234,7 +234,6 @@ function button(_text) constructor {
 
 function listbox() constructor {
 	owner = noone;
-	dept = 0;
     selected = "";
     list = [];
     open = false;
@@ -288,7 +287,6 @@ function listbox() constructor {
         draw_sprite_stretched(sInput, 0, area[0], area[1], area[2] - area[0], area[3] - area[1]);
         scribble($"[Fnt][c_black] {text}").scale_to_box(area[2] - area[0] - string_width("X") - 2, area[3] - area[1] - 3, true).draw(area[0], area[1]);
         if (open) {
-			owner.depth = -9000;
             draw_sprite_stretched(sInput, 0, openarea[0], openarea[1], openarea[2] - openarea[0], openarea[3] - openarea[1]);
             //draw_set_color(c_black);
             //draw_rectangle_area(openarea, false);
@@ -310,18 +308,6 @@ function listbox() constructor {
             }
             openarea[3] = _y + 50;
         }
-		else {
-			if (instance_exists(owner)) {
-				try {
-					owner.depth = dept;
-				}
-				catch(err)
-				{
-					//
-				}
-			}
-			
-		}
         return self;
     }
 }

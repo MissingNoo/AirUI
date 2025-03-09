@@ -34,6 +34,11 @@ if (text != "" and element == undefined)
 }
 
 if (element != undefined) {
+	if (type == "listbox" and element.open) {
+	    depth = -9000;
+	} else {
+		depth = original_depth;
+	}
     element.draw();
 }
 

@@ -301,8 +301,7 @@ global.inspector = flexpanel_create_node({
 	 if (array_length(o) > 2) {
 	     s.data.options = o[2];
 	 }
-	 var node = flexpanel_create_node(s);
-	 
+	 var node = flexpanel_create_node(s);	 
      flexpanel_node_insert_child(global.inspector, node, flexpanel_node_get_num_children(global.inspector));
  }
 
