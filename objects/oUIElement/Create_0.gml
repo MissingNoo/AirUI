@@ -47,9 +47,21 @@ if (string_contains(name, "button")) {
 	type = "button";
     element = new button(text);
 }
+if (string_contains(name, "listbox")) {
+	type = "listbox";
+	element = new listbox();
+	element.owner = self;
+	element.dept = depth;
+	for (var i = 0; i < array_length(data.options); ++i) {
+	    element.add_item(data.options[i]);
+	}
+}
 if (element != undefined) {
     if (data[$ "f"] != undefined) {
         element.set_function(data.f);
     }
     element.position(x, y, x + width, y + height);
+	//if (type == "listbox") {
+	//    show_message(element);
+	//}	
 }

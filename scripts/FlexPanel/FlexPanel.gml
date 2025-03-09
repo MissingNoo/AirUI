@@ -2,6 +2,7 @@ global.edit_mode = false;
 global.edit_node = undefined;
 global.edit_node_owner = undefined;
 function window(struct) constructor {
+	lastdepth = 0;
 	ownername = struct[$ "name"];
 	root = flexpanel_create_node(struct);
 	instances = [];
@@ -33,7 +34,11 @@ function window(struct) constructor {
 		if ((struct_exists(_data, "inst") and (is_string(_data.inst) or !instance_exists(_data.inst))) or !struct_exists(_data, "inst"))
 		{
 			// Create instance
-			var _inst = instance_create_depth(_pos.left, _pos.top, _depth, oUIElement,
+			var _depth2 = _data[$ "options"] != undefined ? -100 + lastdepth : 0;
+			if (_depth2 == -100) {
+			    lastdepth++;
+			}
+			var _inst = instance_create_depth(_pos.left, _pos.top, _depth + _depth2, oUIElement,
 			{
 				name: _name,
 				width: _pos.width,
@@ -254,3 +259,54 @@ global.player_info_ui = {
 	},
     ],
 }
+
+global.options = [
+	["width", "textbox"],
+	["height", "textbox"],
+	["minHeight", "textbox"],
+	["maxHeight", "textbox"],
+	["minWidth", "textbox"],
+	["maxWidth", "textbox"],
+	["padding", "textbox"],
+	["border", "textbox"],
+	["alignContent", "listbox", ["flex-start", "flex-end", "stretch", "center", "space-between", "space-around", "space-evenly"]],
+	["flex", "textbox"],
+	["flexWrap", "listbox", ["no-wrap", "wrap", "wrap-reverse"]],
+	["flexDirection", "listbox", ["columns", "row", "row-reverse", "column-reverse"]],
+	["flexBasis", "textbox"],
+	["margin", "textbox"],
+	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"]],
+	["alignSelf", "listbox", ["flex-start", "flex-end", "center", "baseline"]],
+	["aspectRatio", "textbox"],
+	["display", "listbox", ["none", "flex"]],
+	["gap", "textbox"],
+	["top", "textbox"],
+	["left", "textbox"],
+	["justifyContent", "listbox", ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"]],
+	["position", "listbox", ["relative", "absolute"]],
+]
+
+global.inspector = flexpanel_create_node({
+    name : "panel_side_ignore",
+    flex : 0.2,
+ });
+ 
+ for (var i = 0; i < array_length(global.options); ++i) {
+	 var o = global.options[i];
+	 var s = {
+		 name : $"{o[1]}-{o[0]}-ignore",
+		 flex : 0.25,
+		 data : {}
+	 }
+	 if (array_length(o) > 2) {
+	     s.data.options = o[2];
+	 }
+	 var node = flexpanel_create_node(s);
+	 
+     flexpanel_node_insert_child(global.inspector, node, flexpanel_node_get_num_children(global.inspector));
+ }
+
+ //global.inspector = flexpanel_node_get_struct(global.inspector);
+ 
+ 
+	

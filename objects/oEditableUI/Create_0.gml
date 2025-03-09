@@ -4,6 +4,8 @@ node = undefined;
 creating = false;
 str = {
   "name":"panel_base",
+  "left" :300,
+  "top" :150,
   "flex":1.0,
   "padding":0.0,
   "width":400.0,

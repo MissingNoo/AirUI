@@ -47,12 +47,12 @@ if (data.owner == oUI.ui) {
     var panel = undefined;
     if (edit_node != undefined) {
     	panel = flexpanel_node_get_child(oUI.ui.root , edit_node);
-		if (panel != undefined) {
+		if (panel != undefined and !string_contains(name, "ignore")) {
 		    can_drag_panel = flexpanel_node_get_num_children(panel) == 0;
 		}
     }
 	
-	if (mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_pressed(0, mb_left)) {
+	if (mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_pressed(0, mb_left) and string_contains(name, "draggable")) {
         dragging = true;
         if (type == "panel" and !can_drag_panel) {
         	dragging = false;
@@ -231,3 +231,4 @@ if (editable) {
 	scribble($"{_color}[fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
 	draw_set_color(c_white);
 }
+scribble($"[c_blue][fa_center][fa_middle]{type}").draw(x + (width / 2), y + (height / 2));
