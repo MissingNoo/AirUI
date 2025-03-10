@@ -23,10 +23,10 @@ switch (node) {
 		break;
 }
 
-if (keyboard_check_released(vk_numpad5)) {
-	creating = true;
-	node = flexpanel_create_node({padding : 10, height : 10, flex : 1, name : $"draggable_label_{irandom(99999)}" });
-}
+//if (keyboard_check_released(vk_numpad5)) {
+//	creating = true;
+//	node = flexpanel_create_node({padding : 10, height : 10, flex : 1, name : $"draggable_label_{irandom(99999)}" });
+//}
 
 if (global.edit_node != undefined and node != undefined and !is_string(node)) {
 	//creating = false;

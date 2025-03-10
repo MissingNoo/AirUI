@@ -24,7 +24,8 @@ function window(struct) constructor {
 		// Get layout data
 		var _pos = flexpanel_node_layout_get_position(_node, false);
 		var _name = flexpanel_node_get_name(_node);
-		if (_name == undefined) {
+		//show_message(_name);
+		if (_name == "undefined") {
 		    flexpanel_node_set_name(_node, irandom(999999));
 		}
 	
@@ -259,47 +260,160 @@ global.player_info_ui = {
 	},
     ],
 }
-
 global.options = [
-	["width", "textbox"],
-	["height", "textbox"],
-	["minHeight", "textbox"],
-	["maxHeight", "textbox"],
-	["minWidth", "textbox"],
-	["maxWidth", "textbox"],
-	["padding", "textbox"],
-	["border", "textbox"],
-	["alignContent", "listbox", ["flex-start", "flex-end", "stretch", "center", "space-between", "space-around", "space-evenly"]],
-	["flex", "textbox"],
-	["flexWrap", "listbox", ["no-wrap", "wrap", "wrap-reverse"]],
-	["flexDirection", "listbox", ["columns", "row", "row-reverse", "column-reverse"]],
-	["flexBasis", "textbox"],
-	["margin", "textbox"],
-	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"]],
-	["alignSelf", "listbox", ["flex-start", "flex-end", "center", "baseline"]],
-	["aspectRatio", "textbox"],
-	["display", "listbox", ["none", "flex"]],
-	["gap", "textbox"],
-	["top", "textbox"],
-	["left", "textbox"],
-	["justifyContent", "listbox", ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"]],
-	["position", "listbox", ["relative", "absolute"]],
+	["width", "textbox", function(a) {
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_width(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["height", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_height(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["minHeight", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_min_height(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["maxHeight", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_max_height(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["minWidth", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_min_width(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["maxWidth", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_max_width(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["padding", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_padding(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["border", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_border(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["alignContent", "listbox", ["flex-start", "flex-end", "stretch", "center", "space-between", "space-around", "space-evenly"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_align_content(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["flex", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_flex(node, real(a.text));
+		oEditableUI.ui.recalculate();
+	}],
+	["flexWrap", "listbox", ["no-wrap", "wrap", "wrap-reverse"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_flex_wrap(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["flexDirection", "listbox", ["columns", "row", "row-reverse", "column-reverse"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_flex_direction(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["flexBasis", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_flex_basis(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["margin", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_margin(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_align_items(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["alignSelf", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_align_self(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["aspectRatio", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_aspect_ratio(node, real(a.text));
+		oEditableUI.ui.recalculate();
+	}],
+	["display", "listbox", ["none", "flex"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_display(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["gap", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_gap(node, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["top", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_position(node, flexpanel_edge.top, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["left", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_position(node, flexpanel_edge.left, real(a.text), flexpanel_unit.point);
+		oEditableUI.ui.recalculate();
+	}],
+	["justifyContent", "listbox", ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_justify_content(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["position", "listbox", ["relative", "absolute"], function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_style_set_position_type(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
 ]
 
 global.inspector = flexpanel_create_node({
     name : "panel_side_ignore",
     flex : 0.2,
+	nodes : [
+		{
+			name : "inspector-label-center",
+			height : 30,
+			data : { text : "Inspector" }
+		}
+	],
  });
  
  for (var i = 0; i < array_length(global.options); ++i) {
 	 var o = global.options[i];
 	 var s = {
-		 name : $"{o[1]}-{o[0]}-ignore",
+		 name : $"{o[0]}",
 		 flex : 0.25,
-		 data : {}
+		 flexDirection : "row",
+		 nodes : [
+			{
+				name : "label-center",
+				flex : 1,
+				data : {text : $"{o[0]}"},
+			},
+			{
+				name : $"{o[1]}-{o[0]}-ignore",
+				flex : 1,
+				data : {
+					options : array_length(o) > 2 and is_array(o[2]) ? o[2] : [], 
+					f : array_length(o) > 2 and is_callable(o[2]) ? method(self, o[2]) : method(self, o[3]),
+				}
+			}
+		 ]
 	 }
 	 if (array_length(o) > 2) {
-	     s.data.options = o[2];
+	     //s.data.options = o[2];
 	 }
 	 var node = flexpanel_create_node(s);	 
      flexpanel_node_insert_child(global.inspector, node, flexpanel_node_get_num_children(global.inspector));

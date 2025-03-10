@@ -121,11 +121,15 @@ function draw_surface_part_area(surf, area) {
 }
 
 global.listboxopen = false;
+global.elementselected = noone;
 
 function textbox() constructor {
+	only_numbers = false;
+	owner = noone;
     text = "";
     selected = false;
     area = [0, 0, 0, 0];
+	can_be_null = false;
     func = function(){};
     
     static position = function(x, y, xx, yy) {
@@ -147,23 +151,51 @@ function textbox() constructor {
                 keyboard_lastchar = "";
                 keyboard_lastkey = vk_nokey;
                 selected = true;
+				global.elementselected = self;
                 global.currenttextbox = self;
             } else {
                 selected = false;
             }
         }
         if (selected) {
-            if (keyboard_lastchar != "") {
-                text += keyboard_lastchar;
-                keyboard_lastchar = "";
-                func();
-            }
-            if (keyboard_lastkey == vk_backspace) {
-                text = string_copy(text, 1, string_length(text) - 2);
+			if (keyboard_lastkey == vk_backspace) {
+                text = string_copy(text, 1, string_length(text) - 1);
                 //text = string_delete(text, string_length(text) - 1, 1); 
                 keyboard_lastkey = vk_nokey;
+				return self;
             }
-            
+			if (keyboard_lastkey == vk_enter) {
+			    func(self);
+				keyboard_lastkey = vk_nokey;
+				return self;
+			}
+            if (keyboard_lastchar != "") {
+                text = string(text) + string(keyboard_lastchar);
+                keyboard_lastchar = "";
+				if (only_numbers) {
+					global.dot_pos = undefined;
+					string_foreach(text, function(e, i) {
+						if (e == ".") {
+						    global.dot_pos = i;
+						}
+					});
+				    
+					global.percent_pos = undefined;
+					string_foreach(text, function(e, i) {
+						if (e == "%") {
+						    global.percent_pos = i;
+						}
+					});
+				    text = string_digits(text);
+					if (global.dot_pos != undefined) {
+					    text = string_insert("%", text, global.dot_pos);
+					}
+					if (global.percent_pos != undefined) {
+					    text = string_insert("%", text, global.percent_pos);
+					}
+				}
+				return self;
+            }
         }
         return self;
     }
@@ -180,6 +212,7 @@ function textbox() constructor {
 }
 
 function button(_text) constructor {
+	owner = noone;
     text = _text;
     area = [0, 0, 0, 0];
     enabled = true;
@@ -209,6 +242,7 @@ function button(_text) constructor {
     static on_click = function() {
         if (enabled and (gui ? mouse_in_area_gui(area) : mouse_in_area(area)) and device_mouse_check_button_released(0, mb_left) and gui_can_interact()) {
             func();
+			global.elementselected = self;
         }
         return self;
     }
@@ -267,6 +301,7 @@ function listbox() constructor {
         if (device_mouse_check_button_released(0, mb_left)) {
             if (mouse_in_area_gui(area) and gui_can_interact()) {
                 global.listboxopen = true;
+				global.elementselected = self;
                 open = true;
             //} else if (!mouse_in_area_gui(openarea)) {
             } else {

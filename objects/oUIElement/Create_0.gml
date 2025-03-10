@@ -23,6 +23,7 @@ if (string_contains(name, "root")) {
 
 if (string_contains(name, "label")) {
 	type = "label";
+	//name = string_replace(name, "label", "");
 }
 
 if (string_contains(name, "draggable")) {
@@ -33,35 +34,49 @@ if (string_contains(name, "panel")) {
 	type = "panel";
     draw_back = true;
 	bimg = 1;
+	//name = string_replace(name, "panel", "");
 }
 
 if (string_contains(name, "center")) {
     center_text = true;
+	//name = string_replace(name, "center", "");
 }
 
 element = undefined;
 if (string_contains(name, "textbox")) {
 	type = "textbox";
     element = new textbox();
+	//if (!string_contains(name, "flex")) {
+	element.only_numbers = true;
+	//}	
+	//name = string_replace(name, "textbox", "");
 }
 if (string_contains(name, "button")) {
 	type = "button";
     element = new button(text);
+	//name = string_replace(name, "button", "");
 }
 if (string_contains(name, "listbox")) {
 	type = "listbox";
 	element = new listbox();
-	element.owner = self;
 	element.dept = depth;
 	for (var i = 0; i < array_length(data.options); ++i) {
 	    element.add_item(data.options[i]);
 	}
+	//name = string_replace(name, "listbox", "");
 }
+
+//name = string_replace_all(name, "-", "");
+
 if (element != undefined) {
-    if (data[$ "f"] != undefined) {
+	element.owner = self;
+    if (data[$ "f"] != undefined and type == "textbox") {
         element.set_function(data.f);
     }
     element.position(x, y, x + width, y + height);
+	if (data[$ "selected"] != undefined) {
+	    element.text = data.selected;
+	}
 	//if (type == "listbox") {
 	//    show_message(element);
 	//}	

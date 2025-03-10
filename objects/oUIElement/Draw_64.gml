@@ -42,6 +42,11 @@ if (element != undefined) {
     element.draw();
 }
 
+if (mouse_in_area_gui([x, y, x + width, y + height]) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined) {
+	oUI.editingdepth = depth;
+	oUI.editing = name;
+}
+
 if (data.owner == oUI.ui) {
 	if (mouse_in_area_gui([x, y, x + width, y + height])) {
 		if (edit_node != name and type == "panel") {
@@ -236,4 +241,4 @@ if (editable) {
 	scribble($"{_color}[fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
 	draw_set_color(c_white);
 }
-scribble($"[c_blue][fa_center][fa_middle]{type}").draw(x + (width / 2), y + (height / 2));
+//scribble($"[c_blue][fa_center][fa_middle]{type}").draw(x + (width / 2), y + (height / 2));

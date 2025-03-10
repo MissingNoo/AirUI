@@ -14,4 +14,6 @@ str = {
   },
   "height":300.0,
 }
-ui = new window(str);
+global.player_info_ui.left = 300;
+global.player_info_ui.top = 150;
+ui = new window(global.player_info_ui);
