@@ -33,7 +33,7 @@ if (string_contains(name, "draggable")) {
 
 if (string_contains(name, "panel")) {
 	type = "panel";
-    draw_back = true;
+    draw_back = !string_contains(name, "transparent");
 	bimg = 1;
 	//name = string_replace(name, "panel", "");
 }

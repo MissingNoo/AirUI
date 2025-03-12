@@ -1,6 +1,284 @@
 editing = noone;
 last_edit = noone;
 editingdepth = 999999;
+saveui = undefined;
+save = {
+  "name":"base",
+  "nodes":[
+    {
+      "name":"panel_base",
+      "left":0.0,
+      "nodes":[
+        {
+          "flex":0.10000000149011612,
+          "data":{
+			  text : "Save",
+            "owner":{
+              "target_w":1920.0,
+              "target_h":1080.0,
+              "editing":false,
+              "instances":[
+                "@ref instance(100129)",
+                "@ref instance(100130)",
+                "@ref instance(100131)",
+                "@ref instance(100132)",
+                "@ref instance(100133)",
+                "@ref instance(100134)",
+                "@ref instance(100135)",
+                "@ref instance(100136)",
+                "@ref instance(100142)"
+              ],
+              "root":"@ref flexpanel(654)",
+              "ownername":"base",
+              "lastdepth":0.0
+            },
+            "inst":"@ref instance(100131)"
+          },
+          "name":"label_center_62297"
+        },
+        {
+          "margin":10.0,
+          "border":0.0,
+          "name":"transparent_panel_55029",
+          "nodes":[
+            {
+              "name":"panel_82435",
+              "nodes":[
+                {
+                  "flex":1.0,
+                  "data":{
+					  text : "Are you sure?",
+                    "owner":{
+                      "target_w":1920.0,
+                      "target_h":1080.0,
+                      "editing":false,
+                      "instances":[
+                        "@ref instance(100129)",
+                        "@ref instance(100130)",
+                        "@ref instance(100131)",
+                        "@ref instance(100132)",
+                        "@ref instance(100133)",
+                        "@ref instance(100134)",
+                        "@ref instance(100135)",
+                        "@ref instance(100136)",
+                        "@ref instance(100142)"
+                      ],
+                      "root":"@ref flexpanel(654)",
+                      "ownername":"base",
+                      "lastdepth":0.0
+                    },
+                    "inst":"@ref instance(100142)"
+                  },
+                  "name":"center_label_98113"
+                }
+              ],
+              "flex":1.0,
+              "padding":10.0,
+              "data":{
+                "owner":{
+                  "target_w":1920.0,
+                  "target_h":1080.0,
+                  "editing":false,
+                  "instances":[
+                    "@ref instance(100129)",
+                    "@ref instance(100130)",
+                    "@ref instance(100131)",
+                    "@ref instance(100132)",
+                    "@ref instance(100133)",
+                    "@ref instance(100134)",
+                    "@ref instance(100135)",
+                    "@ref instance(100136)",
+                    "@ref instance(100142)"
+                  ],
+                  "root":"@ref flexpanel(654)",
+                  "ownername":"base",
+                  "lastdepth":0.0
+                },
+                "inst":"@ref instance(100133)"
+              },
+              "height":60.0
+            },
+            {
+              "alignSelf":"center",
+              "flexDirection":"row",
+              "name":"transparent_panel_28819",
+              "nodes":[
+                {
+                  "flex":1.0,
+                  "width":60.0,
+                  "data":{
+					  text : "Yes",
+					  f : function() {
+						  oEditableUI.save();
+						  oUI.saveui.dispose();
+					  },
+                    "owner":{
+                      "target_w":1920.0,
+                      "target_h":1080.0,
+                      "editing":false,
+                      "instances":[
+                        "@ref instance(100129)",
+                        "@ref instance(100130)",
+                        "@ref instance(100131)",
+                        "@ref instance(100132)",
+                        "@ref instance(100133)",
+                        "@ref instance(100134)",
+                        "@ref instance(100135)",
+                        "@ref instance(100136)",
+                        "@ref instance(100142)"
+                      ],
+                      "root":"@ref flexpanel(654)",
+                      "ownername":"base",
+                      "lastdepth":0.0
+                    },
+                    "inst":"@ref instance(100135)"
+                  },
+                  "height":30.0,
+                  "name":"button_save_ok"
+                },
+                {
+                  "flex":1.0,
+                  "width":192.0,
+                  "data":{
+					  text : "Cancel",
+					  f : function() {
+						  oUI.saveui.dispose();
+					  },
+                    "owner":{
+                      "target_w":1920.0,
+                      "target_h":1080.0,
+                      "editing":false,
+                      "instances":[
+                        "@ref instance(100129)",
+                        "@ref instance(100130)",
+                        "@ref instance(100131)",
+                        "@ref instance(100132)",
+                        "@ref instance(100133)",
+                        "@ref instance(100134)",
+                        "@ref instance(100135)",
+                        "@ref instance(100136)",
+                        "@ref instance(100142)"
+                      ],
+                      "root":"@ref flexpanel(654)",
+                      "ownername":"base",
+                      "lastdepth":0.0
+                    },
+                    "inst":"@ref instance(100136)"
+                  },
+                  "height":30.0,
+                  "name":"button_save_cancel"
+                }
+              ],
+              "flex":0.20000000298023224,
+              "padding":10.0,
+              "width":200.0,
+              "data":{
+                "owner":{
+                  "target_w":1920.0,
+                  "target_h":1080.0,
+                  "editing":false,
+                  "instances":[
+                    "@ref instance(100129)",
+                    "@ref instance(100130)",
+                    "@ref instance(100131)",
+                    "@ref instance(100132)",
+                    "@ref instance(100133)",
+                    "@ref instance(100134)",
+                    "@ref instance(100135)",
+                    "@ref instance(100136)",
+                    "@ref instance(100142)"
+                  ],
+                  "root":"@ref flexpanel(654)",
+                  "ownername":"base",
+                  "lastdepth":0.0
+                },
+                "inst":"@ref instance(100134)"
+              },
+              "height":60.0,
+              "alignItems":"center"
+            }
+          ],
+          "flex":1.0,
+          "padding":0.0,
+          "data":{
+            "owner":{
+              "target_w":1920.0,
+              "target_h":1080.0,
+              "editing":false,
+              "instances":[
+                "@ref instance(100129)",
+                "@ref instance(100130)",
+                "@ref instance(100131)",
+                "@ref instance(100132)",
+                "@ref instance(100133)",
+                "@ref instance(100134)",
+                "@ref instance(100135)",
+                "@ref instance(100136)",
+                "@ref instance(100142)"
+              ],
+              "root":"@ref flexpanel(654)",
+              "ownername":"base",
+              "lastdepth":0.0
+            },
+            "inst":"@ref instance(100132)"
+          },
+          "height":304.0
+        }
+      ],
+      "padding":0.0,
+      "top":500.0,
+      "width":249.0,
+      "data":{
+        "inst":"@ref instance(100130)",
+        "owner":{
+          "target_w":1920.0,
+          "target_h":1080.0,
+          "editing":false,
+          "instances":[
+            "@ref instance(100129)",
+            "@ref instance(100130)",
+            "@ref instance(100131)",
+            "@ref instance(100132)",
+            "@ref instance(100133)",
+            "@ref instance(100134)",
+            "@ref instance(100135)",
+            "@ref instance(100136)",
+            "@ref instance(100142)"
+          ],
+          "root":"@ref flexpanel(654)",
+          "ownername":"base",
+          "lastdepth":0.0
+        }
+      },
+      "height":127.0
+    }
+  ],
+  "width":1920.0,
+  "data":{
+    "owner":{
+      "target_w":1920.0,
+      "target_h":1080.0,
+      "editing":false,
+      "instances":[
+        "@ref instance(100129)",
+        "@ref instance(100130)",
+        "@ref instance(100131)",
+        "@ref instance(100132)",
+        "@ref instance(100133)",
+        "@ref instance(100134)",
+        "@ref instance(100135)",
+        "@ref instance(100136)",
+        "@ref instance(100142)"
+      ],
+      "root":"@ref flexpanel(654)",
+      "ownername":"base",
+      "lastdepth":0.0
+    },
+    "inst":"@ref instance(100129)"
+  },
+  "height":1080.0,
+  "alignItems":"center"
+}
 top = {
   "width":1920.0,
   "data":{
@@ -34,7 +312,7 @@ top = {
           "data":{
             text : "Save",
 			f : function() {
-				oEditableUI.save();
+				oUI.saveui = new window(oUI.save);
 			}
           },
           "name":"button_save"
@@ -77,7 +355,7 @@ str = {
   "data":{
     "inst":"@ref instance(100002)"
   },
-  "height":1080.0,
+  "height":1080 - 35,
     flexDirection : "row",
   "nodes":[
   //{

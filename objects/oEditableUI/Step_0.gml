@@ -12,7 +12,10 @@ switch (node) {
         node = flexpanel_create_node({ width : 60, height : 60, name : $"button_{irandom(99999)}"});
         break;
     case "textbox":
-        node = flexpanel_create_node({flex : 1, name : $"textbox__{irandom(99999)}"});
+        node = flexpanel_create_node({flex : 1, name : $"textbox_{irandom(99999)}"});
+        break;
+    case "label":
+        node = flexpanel_create_node({flex : 1, name : $"label_{irandom(99999)}"});
         break;
     //case "panel":
     //    node = flexpanel_create_node({padding : 10, flexDirection : "row", flex : 1, name : $"panel_{irandom(99999)}" });
