@@ -158,9 +158,15 @@ function textbox() constructor {
             }
         }
         if (selected) {
+			if (keyboard_lastkey == vk_f1) {
+                //text = string_copy(text, 1, string_length(text) - 1);
+                text = "";
+                keyboard_lastkey = vk_nokey;
+				return self;
+            }
 			if (keyboard_lastkey == vk_backspace) {
-                text = string_copy(text, 1, string_length(text) - 1);
-                //text = string_delete(text, string_length(text) - 1, 1); 
+                //text = string_copy(text, 1, string_length(text) - 1);
+                text = string_delete(text, string_length(text), 1);
                 keyboard_lastkey = vk_nokey;
 				return self;
             }
@@ -192,6 +198,9 @@ function textbox() constructor {
 					if (global.percent_pos != undefined) {
 					    text = string_insert("%", text, global.percent_pos);
 					}
+				}
+				if (keyboard_lastkey == vk_enter) {
+				    text = string_copy(text, 1, string_length(text) - 1);
 				}
 				return self;
             }

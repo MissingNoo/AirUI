@@ -165,6 +165,7 @@
     {"id":{"name":"__shd_scribble_bake_outline_8dir","path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},},
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
+    {"id":{"name":"Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu","path":"sprites/Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu/Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu.yy",},},
     {"id":{"name":"sButton","path":"sprites/sButton/sButton.yy",},},
     {"id":{"name":"scribble_fallback_bulletpoint","path":"sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy",},},
     {"id":{"name":"sInput","path":"sprites/sInput/sInput.yy",},},

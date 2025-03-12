@@ -54,6 +54,7 @@ function window(struct) constructor {
 		else
 		{
 			var _inst = _data.inst;
+			_inst.name = _name;
 			_inst.x = _pos.left;
 			_inst.y = _pos.top;
 			_inst.width = _pos.width;
@@ -299,6 +300,11 @@ function get_align(str) {
 }
 
 global.options = [
+	["name", "textbox-char", function(a) {
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		flexpanel_node_set_name(node, a.text);
+		oEditableUI.ui.recalculate();
+	}],
 	["width", "textbox", function(a) {
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
 		flexpanel_node_style_set_width(node, a.text, flexpanel_unit.point);

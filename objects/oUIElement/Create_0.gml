@@ -47,9 +47,7 @@ element = undefined;
 if (string_contains(name, "textbox")) {
 	type = "textbox";
     element = new textbox();
-	//if (!string_contains(name, "flex")) {
-	element.only_numbers = true;
-	//}	
+	element.only_numbers = !string_contains(name, "char");
 	//name = string_replace(name, "textbox", "");
 }
 if (string_contains(name, "button")) {

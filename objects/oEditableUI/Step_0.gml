@@ -42,7 +42,7 @@ if (global.edit_node != undefined and node != undefined and !is_string(node)) {
 	node = undefined;
 }
 if (keyboard_check_released(vk_home)) {
-    save();
+    //save();
 	//global.cur_struct = str;
 	//global.clear = function(name, value) {
 	//	var cur = global.cur_struct
@@ -64,6 +64,6 @@ if (keyboard_check_released(vk_home)) {
 	//struct_foreach(str, global.clear);
 }
 if (keyboard_check_released(vk_end)) {
-	load();
+	//load();
 }
 
