@@ -1,11 +1,79 @@
 editing = noone;
 last_edit = noone;
 editingdepth = 999999;
+top = {
+  "width":1920.0,
+  "data":{
+    "owner":{
+      "target_w":1920.0,
+      "target_h":1080.0,
+      "editing":false,
+      "instances":[
+        "@ref instance(100085)",
+        "@ref instance(100086)",
+        "@ref instance(100087)",
+        "@ref instance(100088)",
+        "@ref instance(100089)"
+      ],
+      "root":"@ref flexpanel(82)",
+      "ownername":"base",
+      "lastdepth":0.0
+    },
+    "inst":"@ref instance(100085)"
+  },
+  "height":1080.0,
+  "name":"base",
+  "nodes":[
+    {
+      "flexDirection":"row",
+      "name":"panel_base",
+      "left":0.0,
+      "nodes":[
+        {
+          "width":60.0,
+          "data":{
+            text : "Save",
+			f : function() {
+				oEditableUI.save();
+			}
+          },
+          "name":"button_save"
+        },
+        {
+          "width":60.0,
+          "data":{
+            text : "Load",
+			f : function() {
+				oEditableUI.load();
+			}
+          },
+          "name":"button_load"
+        },
+        {
+          "width":60.0,
+          "data":{
+			  text : "New",
+			  f : function() {
+				oEditableUI.new_window();
+			}
+          },
+          "name":"button_new"
+        }
+      ],
+      "padding":0.0,
+      "top":0.0,
+      "data":{
+      },
+      "height":35.0
+    }
+  ]
+};
 str = {
   "name":"editor",
   "flex":1.0,
   "padding":0.0,
   "width":1920.0,
+  "top" : 35,
   "data":{
     "inst":"@ref instance(100002)"
   },
@@ -71,10 +139,14 @@ nodes : [
   ]
 }
 ui = new window(str);
+top = new window(top);
 //show_message(flexpanel_node_get_struct(global.inspector));
 load_info = function(n) {
 	//show_message(editing);
 	var _node = flexpanel_node_get_child(oEditableUI.ui.root, editing); //node to edit
+	if (_node == undefined) {
+	    exit;
+	}
 	last_edit = editing;
 	flexpanel_node_set_data(flexpanel_node_get_child(ui.root, "inspector-label-center"), {text : $"Inspector - {editing}"});
 	with (oUIElement) {

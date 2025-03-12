@@ -1,3 +1,4 @@
+editor_area = [0, 0, 0, 0];
 original_depth = depth;
 edit_node = undefined;
 edit_element = undefined;
@@ -60,8 +61,10 @@ if (string_contains(name, "listbox")) {
 	type = "listbox";
 	element = new listbox();
 	element.dept = depth;
-	for (var i = 0; i < array_length(data.options); ++i) {
-	    element.add_item(data.options[i]);
+	if (data[$ "options"] != undefined) {
+	    for (var i = 0; i < array_length(data.options); ++i) {
+		    element.add_item(data.options[i]);
+		}
 	}
 	//name = string_replace(name, "listbox", "");
 }
@@ -70,7 +73,7 @@ if (string_contains(name, "listbox")) {
 
 if (element != undefined) {
 	element.owner = self;
-    if (data[$ "f"] != undefined and type == "textbox") {
+    if (data[$ "f"] != undefined) {
         element.set_function(data.f);
     }
     element.position(x, y, x + width, y + height);

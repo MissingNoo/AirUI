@@ -260,90 +260,128 @@ global.player_info_ui = {
 	},
     ],
 }
+
+function get_align(str) {
+	var align = flexpanel_align.flex_start;
+	switch (str) {
+	    case "stretch":
+	        align = flexpanel_align.stretch
+	        break;
+	    case "flex_start":
+	        align = flexpanel_align.flex_start
+	        break;
+	    case "flex_end":
+	        align = flexpanel_align.flex_end
+	        break;
+	    case "center":
+	        align = flexpanel_align.center
+	        break;
+	    case "baseline":
+			align = flexpanel_align.baseline
+	        break;
+	    case "column":
+			align = flexpanel_flex_direction.column
+	        break;
+	    case "row":
+			align = flexpanel_flex_direction.row
+	        break;
+	    case "column-reverse":
+			align = flexpanel_flex_direction.column_reverse
+	        break;
+	    case "row-reverse":
+			align = flexpanel_flex_direction.row_reverse
+	        break;
+		default:
+			align = -1;
+			break;
+	}
+	return align;
+}
+
 global.options = [
 	["width", "textbox", function(a) {
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_width(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["height", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_height(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["minHeight", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_min_height(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_min_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["maxHeight", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_max_height(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_max_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["minWidth", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_min_width(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_min_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["maxWidth", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_max_width(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_max_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["padding", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_padding(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_padding(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["border", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_border(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_border(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["alignContent", "listbox", ["flex-start", "flex-end", "stretch", "center", "space-between", "space-around", "space-evenly"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_align_content(node, a.text);
+		flexpanel_node_style_set_align_content(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["flex", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_flex(node, real(a.text));
+		flexpanel_node_style_set_flex(node, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["flexWrap", "listbox", ["no-wrap", "wrap", "wrap-reverse"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_flex_wrap(node, a.text);
+		flexpanel_node_style_set_flex_wrap(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
-	["flexDirection", "listbox", ["columns", "row", "row-reverse", "column-reverse"], function(a){
+	["flexDirection", "listbox", ["column", "row", "row-reverse", "column-reverse"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_flex_direction(node, a.text);
+		flexpanel_node_style_set_flex_direction(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["flexBasis", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_flex_basis(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_flex_basis(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["margin", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_margin(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_margin(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_align_items(node, a.text);
+		flexpanel_node_style_set_align_items(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["alignSelf", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_align_self(node, a.text);
+		flexpanel_node_style_set_align_self(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["aspectRatio", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_aspect_ratio(node, real(a.text));
+		flexpanel_node_style_set_aspect_ratio(node, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["display", "listbox", ["none", "flex"], function(a){
@@ -353,22 +391,22 @@ global.options = [
 	}],
 	["gap", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_gap(node, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_gap(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["top", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_position(node, flexpanel_edge.top, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_position(node, flexpanel_edge.top, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["left", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_position(node, flexpanel_edge.left, real(a.text), flexpanel_unit.point);
+		flexpanel_node_style_set_position(node, flexpanel_edge.left, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["justifyContent", "listbox", ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_justify_content(node, a.text);
+		flexpanel_node_style_set_justify_content(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["position", "listbox", ["relative", "absolute"], function(a){
@@ -389,7 +427,6 @@ global.inspector = flexpanel_create_node({
 		}
 	],
  });
- 
  for (var i = 0; i < array_length(global.options); ++i) {
 	 var o = global.options[i];
 	 var s = {

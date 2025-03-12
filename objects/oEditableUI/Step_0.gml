@@ -1,7 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-if (keyboard_check(vk_delete)) {
-    //show_message(ui.get_element_data("button_play", "text"));
+if (keyboard_check_released(vk_insert)) {
 	ui.edit_mode(true);
 }
 
@@ -40,12 +39,28 @@ if (global.edit_node != undefined and node != undefined and !is_string(node)) {
 	node = undefined;
 }
 if (keyboard_check_released(vk_home)) {
-    var f = file_text_open_write("test");
-	file_text_write_string(f, json_stringify(flexpanel_node_get_struct(n_root), true));
-	file_text_close(f);
+    save();
+	//global.cur_struct = str;
+	//global.clear = function(name, value) {
+	//	var cur = global.cur_struct
+	//	if (is_struct(value)) {
+	//		global.cur_struct = value;
+	//	    struct_foreach(value, global.clear);
+	//	}
+	//	global.cur_struct = cur;
+	//	if (name == "instances") {
+	//	    global.cur_struct.instances = [];
+	//	}
+	//	if (name == "inst") {
+	//	    struct_remove(global.cur_struct, "inst");
+	//	}
+	//	if (name == "owner") {
+	//	    global.cur_struct.owner = noone;
+	//	}
+	//}
+	//struct_foreach(str, global.clear);
 }
 if (keyboard_check_released(vk_end)) {
-	ui.dispose();
-	ui = new window(flexpanel_create_node(buffer_read(buffer_load("test"), buffer_string)));
+	load();
 }
 

@@ -41,8 +41,9 @@ if (element != undefined) {
 	}
     element.draw();
 }
-
-if (mouse_in_area_gui([x, y, x + width, y + height]) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined) {
+var editor = flexpanel_node_get_data(flexpanel_node_get_child(oUI.ui.root, "panel_side_ignore"));
+editor_area = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
+if (mouse_in_area_gui([x, y, x + width, y + height]) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined and !mouse_in_area_gui(editor_area)) {
 	oUI.editingdepth = depth;
 	oUI.editing = name;
 }
@@ -87,66 +88,6 @@ if (editable) {
 			global.edit_node_owner = data.owner;
         }
 	}
-	//	if (global.edit_element != name and type != "panel") {
-	//		global.edit_element = name;
-    //    }
-	//	if (resizing == noone and (edit_node == undefined or edit_node != name and type == "panel")) {
-	//		edit_node = name;
-    //    }
-	//	if (resizing == noone and data.owner != "editor_base" and (edit_element == undefined or edit_element != name)) {
-	//		if (type == "panel") {
-	//			if (keyboard_check(vk_insert)) {
-	//			    edit_element = name;
-	//			}			    
-	//		}
-	//		else {
-	//			edit_element = name;
-	//		}			
-    //    }
-	//}
-    
-    
-	
-	//if ((global.edit_node != undefined or global.edit_element != undefined) and data.owner != "editor_base") {
-	//	var v = global.edit_node;
-	//	if (global.edit_node == undefined) {
-	//	    v = global.edit_element;
-	//	}
-	//    var ele = flexpanel_node_get_child(oEditableUI.n_root, v);
-	//	if (device_mouse_check_button_released(0, mb_middle) and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
-	//		deltimer = 60;
-	//		flexpanel_node_style_set_flex(ele, !flexpanel_node_style_get_flex(ele));
-	//		if (type == "panel") {
-	//			show_message_async(flexpanel_node_style_get_flex_direction(ele));
-	//			switch (flexpanel_node_style_get_flex_direction(ele)) {
-	//			    case "row":
-	//			        flexpanel_node_style_set_flex_direction(ele, "column");
-	//			        break;
-	//			    case "column":
-	//			        flexpanel_node_style_set_flex_direction(ele, "row");
-	//			        break;
-	//			}
-			    
-	//		}
-	//		oEditableUI.recalculate();
-	//	}
-	//}
-	
-    //if (edit_element != undefined and data.owner != "editor_base") {
-    //	var ele = flexpanel_node_get_child(oEditableUI.n_root, edit_element);
-	//	#region delete
-	//	if (keyboard_check_released(vk_delete) and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
-	//		deltimer = 60;
-	//	    flexpanel_node_remove_child(oEditableUI.n_root, ele);
-	//		ele = undefined;
-	//		with (oUIElement) {
-	//			if (data.owner != "editor_base") {
-	//			    instance_destroy();
-	//			}
-	//		}
-	//		oEditableUI.recalculate();
-	//	}
-	//	#endregion
 		#region resize
 		#region left
 		if (mouse_in_area_gui([x - 2, y, x + 2, y + height])) {

@@ -164,7 +164,7 @@ function textbox() constructor {
                 keyboard_lastkey = vk_nokey;
 				return self;
             }
-			if (keyboard_lastkey == vk_enter) {
+			if (keyboard_lastkey == vk_enter and text != "") {
 			    func(self);
 				keyboard_lastkey = vk_nokey;
 				return self;
@@ -179,7 +179,6 @@ function textbox() constructor {
 						    global.dot_pos = i;
 						}
 					});
-				    
 					global.percent_pos = undefined;
 					string_foreach(text, function(e, i) {
 						if (e == "%") {
@@ -188,7 +187,7 @@ function textbox() constructor {
 					});
 				    text = string_digits(text);
 					if (global.dot_pos != undefined) {
-					    text = string_insert("%", text, global.dot_pos);
+					    text = string_insert(".", text, global.dot_pos);
 					}
 					if (global.percent_pos != undefined) {
 					    text = string_insert("%", text, global.percent_pos);
@@ -286,6 +285,11 @@ function listbox() constructor {
         func_on_select = f;
         return self;
     }
+	
+    static set_function = function(f) {
+        func_on_select = f;
+        return self;
+    }
     
     static add_item = function(name) {
         array_push(list, name);
@@ -333,7 +337,7 @@ function listbox() constructor {
                 var click_area = [openarea[0], _y, openarea[2], openarea[3]];
                 if (mouse_in_area_gui(click_area) and device_mouse_check_button_pressed(0, mb_left)) {
                     text = list[i];
-                    func_on_select();
+                    func_on_select(self);
                 }
                 scribble($"[Fnt][c_black] {list[i]}").scale(0.40).draw(openarea[0], _y);
                 offset += 40;
