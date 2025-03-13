@@ -148,9 +148,8 @@ function textbox() constructor {
 		if (mouse_in_area_gui(area) and w != 0) {
 			try {
 				if (is_real(real(text))) {
-					if (keyboard_check(vk_shift)) {
-					    w = w * 10;
-					}
+					if (keyboard_check(vk_shift)) { w = w * 10; }
+					if (keyboard_check(vk_control)) { w = w * 0.1; }
 				    text = real(text) + w;
 					func(self);
 				}
@@ -240,8 +239,14 @@ function button(_text) constructor {
     area = [0, 0, 0, 0];
     enabled = true;
     gui = true;
+	sprite_back = sButton;
+	sprite = sButton;
     func = function(){};
     
+	static set_sprite = function(spr) {
+		sprite = spr;
+	}
+	
     static set_gui = function(boolean) {
         gui = boolean;
         return self;
@@ -264,7 +269,7 @@ function button(_text) constructor {
     
     static on_click = function() {
         if (enabled and (gui ? mouse_in_area_gui(area) : mouse_in_area(area)) and device_mouse_check_button_released(0, mb_left) and gui_can_interact()) {
-            func();
+            func(self);
 			global.elementselected = self;
         }
         return self;
@@ -283,7 +288,10 @@ function button(_text) constructor {
             held = true;
             _y += 3;
         }
-        draw_sprite_stretched(sButton, held, area[0], area[1], area[2] - area[0], area[3] - area[1]);
+		if (sprite_back != undefined) {
+		    draw_sprite_stretched(sprite_back, held, area[0], area[1], area[2] - area[0], area[3] - area[1]);
+		}        
+        draw_sprite_stretched(sprite, held, area[0], area[1], area[2] - area[0], area[3] - area[1]);
         var alpha = enabled ? 1 : 0.5;
         scribble($"[Fnt][alpha,{alpha}][c_black][fa_center]{text}").scale_to_box(area[2] - area[0] - string_width("X") - 2, area[3] - area[1] - 3, true).draw(area[0] + ((area[2] - area[0]) / 2), _y - 2);
         return self;

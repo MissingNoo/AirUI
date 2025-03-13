@@ -1,4 +1,5 @@
 editor_area = [0, 0, 0, 0];
+editor_area2 = [0, 0, 0, 0];
 original_depth = depth;
 edit_node = undefined;
 edit_element = undefined;
@@ -66,11 +67,13 @@ if (string_contains(name, "listbox")) {
 	}
 	//name = string_replace(name, "listbox", "");
 }
-
 //name = string_replace_all(name, "-", "");
 
 if (element != undefined) {
 	element.owner = self;
+	if (data[$ "sprite"] != undefined) {
+	    element.set_sprite(data.sprite);
+	}
     if (data[$ "f"] != undefined) {
         element.set_function(data.f);
     }

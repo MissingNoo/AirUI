@@ -1,4 +1,6 @@
 randomize();
+down = false;
+up = false;
 edit_node = undefined;
 node = undefined;
 creating = false;

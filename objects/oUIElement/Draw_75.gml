@@ -1,7 +1,7 @@
 if (!editable) {
     exit;
 }
-if (mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_released(0, mb_left) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined and !mouse_in_area_gui(editor_area)) {
+if (mouse_in_area_gui([x, y, x + width, y + height]) and device_mouse_check_button_released(0, mb_left) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined and !mouse_in_area_gui(editor_area) and !mouse_in_area_gui(editor_area2)) {
 	oUI.load_info();
 	oUI.editingdepth = 999999;
 	//oUI.last_edit = oUI.editing;
@@ -26,8 +26,11 @@ if (oUI.editing != undefined and name == oUI.editing) {
 		}
 		oEditableUI.ui.recalculate();
 	}
-	var move_offset = - keyboard_check_released(vk_pageup) + keyboard_check_released(vk_pagedown);
-	if ((keyboard_check_released(vk_pagedown) or keyboard_check_released(vk_pageup)) and parent != undefined and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
+	var move_offset = - keyboard_check_released(vk_pageup) - oUI.up + keyboard_check_released(vk_pagedown) + oUI.down;
+	//show_debug_message(move_offset);
+	//show_debug_message($"{oUI.up}:{oUI.down}");
+	//if ((keyboard_check_released(vk_pagedown) or keyboard_check_released(vk_pageup) or oUI.down or oUI.up) and parent != undefined and ele != undefined and deltimer == 0) {
+	if ((keyboard_check_released(vk_pagedown) or keyboard_check_released(vk_pageup) or oUI.down or oUI.up) and parent != undefined and ele != undefined and mouse_in_area_gui([x, y, x + width, y + height]) and deltimer == 0) {
 		//show_message(flexpanel_node_get_parent(flexpanel_node_get_parent(ele)));
 		deltimer = 60;
 		var str = flexpanel_node_get_struct(parent);

@@ -18,7 +18,13 @@ function window(struct) constructor {
 	static edit_mode = function() {
 		editing = !editing;
 		for (var i = 0; i < array_length(instances); ++i) {
-		    instances[i].editable = editing;
+			if (instance_exists(instances[i])) {
+			    instances[i].editable = editing;
+			} else {
+				array_delete(instances, i, 1);
+				i = 0;
+			}
+		    
 		}
 	}
 	
@@ -82,6 +88,7 @@ function window(struct) constructor {
 	}
 	
 	static recalculate = function() {
+		//dispose();
 		target_w = display_get_gui_width();
 		target_h = display_get_gui_height();
 		flexpanel_calculate_layout(root, target_w, target_h, flexpanel_direction.LTR);

@@ -3,6 +3,10 @@
 
 function __scribble_font_add_from_project(_font)
 {
+	var e = [scribble_fallback_font, Fnt];
+	if (!array_contains(e, _font)) {
+	    return;
+	}
     var _name = font_get_name(_font);
     
     static _font_data_map = __scribble_initialize().__font_data_map;

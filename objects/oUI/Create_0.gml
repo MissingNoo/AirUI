@@ -1,3 +1,5 @@
+up = false;
+down = false;
 editing = noone;
 last_edit = noone;
 editingdepth = 999999;
@@ -323,6 +325,7 @@ top = {
             text : "Load",
 			f : function() {
 				oEditableUI.load();
+				oUI.add_to_list();
 			}
           },
           "name":"button_load"
@@ -336,7 +339,81 @@ top = {
 			}
           },
           "name":"button_new"
-        }
+        },
+        {
+          "width":32.0,
+          "data":{
+			  text : "",
+			  sprite : Icon_Bolt,
+			  f : function() {
+				  var node = oEditableUI.ui.get_child("base");
+				  if (node != undefined) {
+					  var str = {
+						  "name":$"panel_base_{irandom(99999)}",
+						  "left" :300,
+						  "top" :150,
+						  "padding":0.0,
+						  "width":400.0,
+						  "height":300.0,
+						  };
+				      flexpanel_node_insert_child(node, flexpanel_create_node(str), 0);
+					  oEditableUI.ui.recalculate();
+				  }
+			}
+          },
+          "name":"button_add_panel"
+        },
+        {
+          "width":32.0,
+          "data":{
+			  text : "",
+			  sprite : Icon_Cross,
+			  f : function() {
+				  var node = oEditableUI.ui.get_child(oUI.editing);
+				  if (node != undefined) {
+				      var parent = flexpanel_node_get_parent(node);
+					  if (parent != undefined) {
+						  flexpanel_node_remove_child(parent, oEditableUI.ui.get_child(oUI.editing));
+						  oEditableUI.ui.recalculate();
+					  }
+				  }
+			}
+          },
+          "name":"button_cross"
+        },
+        {
+          "width":32.0,
+          "data":{
+			  text : "",
+			  sprite : Icon_Retry,
+			  f : function() {
+				  oUI.add_to_list();
+			}
+          },
+          "name":"button_reload"
+        },
+        //{
+        //  "width":32.0,
+        //  "data":{
+		//	  text : "",
+		//	  sprite : Icon_ArrowUp,
+		//	  f : function() {
+		//		oUI.up = true;
+		//	}
+        //  },
+        //  "name":"button_up"
+        //},
+        //{
+        //  "width":32.0,
+        //  "data":{
+		//	  text : "",
+		//	  sprite : Icon_ArrowDown,
+		//	  f : function() {
+		//		oUI.down = true;
+		//	}
+        //  },
+        //  "name":"button_down"
+        //},
       ],
       "padding":0.0,
       "top":0.0,
@@ -562,13 +639,12 @@ get_children = function(list, node) {
 }
 
 add_to_list = function() {
-	//var base = flexpanel_node_get_child(ui.root, "panel_list_base");
-	//flexpanel_node_remove_all_children(base);
-	//with (oUIElement) {
-	//    if (data.owner == oUI.ui) {
-	//	    instance_destroy();
-	//	}
-	//}
+	flexpanel_node_remove_all_children(ui.get_child("panel_list_base"));
+	with (oUIElement) {
+	    if (string_contains(name, "elnam")) {
+		    instance_destroy();
+		}
+	}
 	var node = oEditableUI.ui.root;
 	//var _name = flexpanel_node_get_name(node);
 	//for (var i = 0; i < flexpanel_node_get_num_children(node); ++i) {
@@ -579,8 +655,33 @@ add_to_list = function() {
 		get_children(list, node);
 	    //flexpanel_node_insert_child(flexpanel_node_get_child(ui.root, "panel_list_base"), get_children(flexpanel_node_get_child(node, i)), 0);
 	}
-	show_message(list);
-	
+	var s = json_stringify(list);
+	s = string_replace_all(s, "{", "");
+	s = string_replace_all(s, "}", "");
+	s = string_replace_all(s, "[", "");
+	s = string_replace_all(s, "]", ":");
+	s = string_replace_all(s, "\"", "");
+	s = string_replace_all(s, ",", ":");
+	s = string_replace_all(s, "childs", "");
+	s = string_replace_all(s, " ", "");
+	var a = string_split(s, ":", true);
+	//show_message(a);
+	var _add = function(e, i) {
+		flexpanel_node_insert_child(oUI.ui.get_child("panel_list_base"), flexpanel_create_node({
+			flex : 1,
+			maxHeight : 30,
+			margin : 2,
+			name : "button_center_elnam",
+			data : {
+				text : e,
+				f : function(a) {
+					oUI.editing = a.text;
+					oUI.load_info();
+				}
+			}
+		}),0);
+	}
+	array_foreach(a, _add);
 
 	
 			
@@ -594,5 +695,4 @@ add_to_list = function() {
 	ui.recalculate();
 }
 
-
-      
+//add_to_list();

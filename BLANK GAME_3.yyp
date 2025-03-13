@@ -10,6 +10,7 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"io.gamemaker.uiiconspixelflat-1.0.0","folderPath":"folders/io.gamemaker.uiiconspixelflat-1.0.0.yy","name":"io.gamemaker.uiiconspixelflat-1.0.0","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Misc","folderPath":"folders/Objects/Misc.yy","name":"Misc","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -42,7 +43,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1300.0.768",
+    "IDEVersion":"2024.1300.0.775",
   },
   "name":"BLANK GAME_3",
   "resources":[
@@ -166,6 +167,11 @@
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
     {"id":{"name":"Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu","path":"sprites/Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu/Game_Boy_Advance___Pokemon_FireRed_LeafGreen___Pokemon_Menu.yy",},},
+    {"id":{"name":"Icon_ArrowDown","path":"sprites/Icon_ArrowDown/Icon_ArrowDown.yy",},},
+    {"id":{"name":"Icon_ArrowUp","path":"sprites/Icon_ArrowUp/Icon_ArrowUp.yy",},},
+    {"id":{"name":"Icon_Bolt","path":"sprites/Icon_Bolt/Icon_Bolt.yy",},},
+    {"id":{"name":"Icon_Cross","path":"sprites/Icon_Cross/Icon_Cross.yy",},},
+    {"id":{"name":"Icon_Retry","path":"sprites/Icon_Retry/Icon_Retry.yy",},},
     {"id":{"name":"sButton","path":"sprites/sButton/sButton.yy",},},
     {"id":{"name":"scribble_fallback_bulletpoint","path":"sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy",},},
     {"id":{"name":"sInput","path":"sprites/sInput/sInput.yy",},},

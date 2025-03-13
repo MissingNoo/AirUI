@@ -42,8 +42,12 @@ if (element != undefined) {
     element.draw();
 }
 var editor = flexpanel_node_get_data(flexpanel_node_get_child(oUI.ui.root, "panel_side_ignore"));
+
+
 //editor_area = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
 editor_area = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
+editor = flexpanel_node_get_data(oUI.ui.get_child("panel_list_base"));
+editor_area2 = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
 if (mouse_in_area_gui([x, y, x + width, y + height]) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined and !mouse_in_area_gui(editor_area)) {
 	oUI.editingdepth = depth;
 	oUI.editing = name;
@@ -176,20 +180,21 @@ if (editable) {
     //}
     
 	var _color = "[c_blue]";
-	if (global.edit_node == name ) {
+	if (global.edit_node == name or oUI.editing == name or oUI.last_edit == name) {
 	    _color = "[c_red]";
+		draw_set_color(c_red);
 	}
-    draw_rectangle(x, y, x + width, y + height, 1);
-	if (type == "panel" and keyboard_check(vk_f2)) {
+    draw_rectangle(x, y, x + width, y + height, true);
+	if (type == "panel" and keyboard_check(vk_f2) or oUI.editing == name or oUI.last_edit == name) {
 		if (_color = "[c_blue]") {
 		    _color = "[c_purple]";
 		}
+		
 	    scribble($"{_color}[fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
 	}
 	else if (type != "panel") {
 		scribble($"{_color}[fa_center][fa_middle]{name}").draw(x + (width / 2), y + (height / 2));
 	}
-	
 	draw_set_color(c_white);
 }
 //scribble($"[c_blue][fa_center][fa_middle]{type}").draw(x + (width / 2), y + (height / 2));

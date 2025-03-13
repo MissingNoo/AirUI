@@ -119,7 +119,7 @@ function __scribble_array_find_index(_array, _value)
  
 function __scribble_asset_is_krutidev(_asset, _asset_type)
 {
-    var _tags_array = asset_get_tags(_asset, _asset_type);
+    var _tags_array = asset_get_tags(_asset);
     var _i = 0;
     repeat(array_length(_tags_array))
     {
