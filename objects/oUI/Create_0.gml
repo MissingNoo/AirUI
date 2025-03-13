@@ -440,7 +440,7 @@ load_info = function(n) {
 		    instance_destroy();
 		}
 	}
-	show_debug_message(flexpanel_node_get_data(flexpanel_node_get_child(ui.root, "inspector-label-center")));
+	//show_debug_message(flexpanel_node_get_data(flexpanel_node_get_child(ui.root, "inspector-label-center")));
 	//show_message("");
 	for (var i = 0; i < array_length(global.options); ++i) {
 		o = global.options[i];
@@ -462,4 +462,137 @@ load_info = function(n) {
 	//}
 }
 flexpanel_node_insert_child(flexpanel_node_get_child(ui.root, "editor"), global.inspector, 0);
+
+list_base = {
+      "flex":1.0,
+      "name":"panel_list_base",
+      "padding":0.0,
+      "width":200.0,
+	  minWidth : 200,
+	  maxWidth : 200,
+      "nodes":[
+        ]
+    }
+flexpanel_node_insert_child(flexpanel_node_get_child(ui.root, "editor"), flexpanel_create_node(list_base), 2);
 ui.recalculate();
+
+get_children = function(list, node) {
+	list[$ flexpanel_node_get_name(node)] = {};
+	var childs = flexpanel_node_get_num_children(node);
+	if (childs > 0) {
+		var l = list[$ flexpanel_node_get_name(node)];
+		if (string_contains(flexpanel_node_get_name(node), "panel")) {
+			    l[$ "childs"] = [];
+		}		
+		for (var j = 0; j < childs; ++j) {
+			var c = flexpanel_node_get_child(node, j);
+			var n = flexpanel_node_get_name(c);
+			if (string_contains(n, "panel")) {
+			    get_children(l, c);
+			} else {
+				array_push(l[$ "childs"], n);
+			}
+		}
+	}
+	//var _add = {
+    //    "margin":5.0,
+    //    "name":$"panel_parent_{flexpanel_node_get_name(node)}",
+    //    "padding":0.0,
+    //    "height":60.0,
+    //    "nodes":[
+    //    {
+    //        "name":"label_center_parent_name",
+    //        "padding":0.0,
+    //        "height":60.0,
+    //        "flex":0.20000000298023224,
+	//		data : {text : flexpanel_node_get_name(node)}
+    //    }
+    //    ],
+    //    "flex":1.0
+    //}
+	//var to_add = flexpanel_create_node(_add);
+	//for (var i = 0; i < flexpanel_node_get_num_children(node); ++i) {
+	//		var child_name = flexpanel_node_get_name(flexpanel_node_get_child(node, i));
+	//	    var child = {
+    //          "margin":10.0,
+    //          "name":"panel_child_list",
+    //          "flexDirection":"row",
+    //          "padding":2.0,
+    //          "height":60.0,
+    //          "nodes":[
+    //            {
+    //              "name":"spacer",
+    //              "padding":0.0,
+    //              "maxWidth":20.0,
+    //              "width":60.0,
+    //              "height":60.0
+    //            },
+    //            {
+    //              "name":"panel_29296_transparent",
+    //              "padding":0.0,
+    //              "width":60.0,
+    //              "height":30.0,
+    //              "nodes":[
+    //                {
+    //                  "name":"label_center_child_name",
+    //                  "flex":1.0,
+	//				  maxHeight : 20,
+	//				  data : {text : child_name}
+    //                }
+    //              ],
+    //              "flex":1.0
+    //            }
+    //          ],
+    //          "flex":1.0
+    //        }
+	//		var childs = flexpanel_node_get_num_children(node);
+	//		try {
+	//			flexpanel_node_insert_child(to_add, childs, 0);
+	//		}
+	//		catch (err) {}
+	//		if (childs > 0) {
+	//		    for (var j = 0; j < flexpanel_node_get_num_children(node); ++j) {
+	//				if (flexpanel_node_get_child(oUI.ui.root, $"panel_parent_{flexpanel_node_get_name(node)}") == undefined) {
+	//				    flexpanel_node_insert_child(flexpanel_node_get_child(oUI.ui.root, "panel_list_base"), get_children(flexpanel_node_get_child(node, j)), 0);
+	//				}
+	//			}
+	//		}
+	//}
+	//return to_add;
+}
+
+add_to_list = function() {
+	//var base = flexpanel_node_get_child(ui.root, "panel_list_base");
+	//flexpanel_node_remove_all_children(base);
+	//with (oUIElement) {
+	//    if (data.owner == oUI.ui) {
+	//	    instance_destroy();
+	//	}
+	//}
+	var node = oEditableUI.ui.root;
+	//var _name = flexpanel_node_get_name(node);
+	//for (var i = 0; i < flexpanel_node_get_num_children(node); ++i) {
+	//    flexpanel_node_insert_child(flexpanel_node_get_child(ui.root, "panel_list_base"), get_children(flexpanel_node_get_child(node, i)), 0);
+	//}
+	var list = {};
+	for (var i = 0; i < flexpanel_node_get_num_children(node); ++i) {
+		get_children(list, node);
+	    //flexpanel_node_insert_child(flexpanel_node_get_child(ui.root, "panel_list_base"), get_children(flexpanel_node_get_child(node, i)), 0);
+	}
+	show_message(list);
+	
+
+	
+			
+		// Call for children (recursive)
+		//var _children_count = flexpanel_node_get_num_children(_node);
+		//for (var i = 0; i < _children_count; i++)
+		//{
+		//	var _child = flexpanel_node_get_child(_node, i);
+		//	generate_instance(_child, _depth - 1);
+		//}
+	ui.recalculate();
+}
+
+
+      

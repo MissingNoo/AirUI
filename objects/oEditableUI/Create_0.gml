@@ -18,6 +18,17 @@ str = {
 				    "inst":"@ref instance(100002)"
 				  },
 				  "height":300.0,
+			},
+			{
+				  "name":"panel_base2",
+				  "left" :800,
+				  "top" :150,
+				  "padding":0.0,
+				  "width":400.0,
+				  "data":{
+				    "inst":"@ref instance(100002)"
+				  },
+				  "height":300.0,
 			}
 		]
 	//}
@@ -45,3 +56,4 @@ load = function() {
 	ui = new window(json_parse(buffer_read(buffer_load("test"), buffer_text)));
 	ui.edit_mode(true);
 }
+
