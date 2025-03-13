@@ -122,6 +122,7 @@ function draw_surface_part_area(surf, area) {
 
 global.listboxopen = false;
 global.elementselected = noone;
+global.listboxtimer = 60;
 
 function textbox() constructor {
 	only_numbers = false;
@@ -143,6 +144,19 @@ function textbox() constructor {
     }
     
     static tick = function() {
+		var w =  mouse_wheel_up() - mouse_wheel_down();
+		if (mouse_in_area_gui(area) and w != 0) {
+			try {
+				if (is_real(real(text))) {
+					if (keyboard_check(vk_shift)) {
+					    w = w * 10;
+					}
+				    text = real(text) + w;
+					func(self);
+				}
+			}
+			catch (err) {}
+		}
         if (device_mouse_check_button_released(0, mb_left) and gui_can_interact()) {
             if (mouse_in_area_gui(area)) {
                 if (os_type == os_android) {
@@ -209,6 +223,7 @@ function textbox() constructor {
     }
     
     static draw = function() {
+		if (area[0] == area[2]) { exit; }
         tick();
         //draw_set_color(c_black);
         //draw_rectangle_area(area, false, [c_black, selected ? c_yellow : c_white]);
@@ -255,7 +270,8 @@ function button(_text) constructor {
         return self;
     }
     
-    static draw = function() { 
+    static draw = function() {
+		if (area[0] == area[2]) { exit; }
         on_click();
         //draw_set_color(c_black);
         //draw_rectangle_area(area, false);
@@ -326,6 +342,7 @@ function listbox() constructor {
     }
     
     static draw = function() {
+		if (area[0] == area[2]) { exit; }
         openarea[1] = area[1] + (area[3] - area[1]) + 2;
         on_click();
         //draw_set_color(c_black);
@@ -348,7 +365,7 @@ function listbox() constructor {
                     text = list[i];
                     func_on_select(self);
                 }
-                scribble($"[Fnt][c_black] {list[i]}").scale(0.40).draw(openarea[0], _y);
+                scribble($"[Fnt][c_black] {list[i]}").scale_to_box(area[2] - area[0] - string_width("X") - 2, area[3] - area[1] - 3, true).draw(openarea[0], _y);
                 offset += 40;
                 if (openarea[3] < _y) {
                     openarea[3] = _y + offset + 10;

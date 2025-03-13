@@ -365,6 +365,7 @@ str = {
   {flex : 1, flexGrow: 1},
     {
     name : "panel_side",
+	maxWidth : 30,
     flex : 0.15,
 nodes : [
     {
@@ -374,6 +375,8 @@ nodes : [
       },
       "height":5.0,
       "name":"draggable_button",
+	  maxWidth : 30,
+	  maxHeight: 30,
       "flex":1.0
     },
     {
@@ -383,6 +386,8 @@ nodes : [
       },
       "height":5.0,
       "name":"draggable_textbox",
+	  maxWidth : 30,
+	  maxHeight: 30,
       "flex":1.0
     },
     {
@@ -392,6 +397,8 @@ nodes : [
       },
       "height":10.0,
       "name":"draggable_panel",
+	  maxWidth : 30,
+	  maxHeight: 30,
       "flex":1.0
     },
     {
@@ -401,6 +408,7 @@ nodes : [
       },
       "height":10.0,
       "name":"draggable_label_7549",
+	  maxWidth : 30,
       "flex":1.0
     },
     {

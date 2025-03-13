@@ -20,7 +20,7 @@ str = {
 				  "height":300.0,
 			}
 		]
-	//}	
+	//}
 }
 global.player_info_ui.left = 300;
 global.player_info_ui.top = 150;
@@ -30,6 +30,7 @@ ui = new window(str);
 new_window = function() {
 	ui.dispose();
 	ui = new window(str);
+	ui.edit_mode(true);
 }
 
 save = function() {
@@ -42,4 +43,5 @@ save = function() {
 load = function() {
 	ui.dispose();
 	ui = new window(json_parse(buffer_read(buffer_load("test"), buffer_text)));
+	ui.edit_mode(true);
 }

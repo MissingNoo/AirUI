@@ -42,6 +42,7 @@ if (element != undefined) {
     element.draw();
 }
 var editor = flexpanel_node_get_data(flexpanel_node_get_child(oUI.ui.root, "panel_side_ignore"));
+//editor_area = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
 editor_area = [editor.inst.x, editor.inst.y, editor.inst.x + editor.inst.width, editor.inst.y + editor.inst.height];
 if (mouse_in_area_gui([x, y, x + width, y + height]) and data.owner != oUI.ui and oUI.editingdepth >= depth and name != undefined and !mouse_in_area_gui(editor_area)) {
 	oUI.editingdepth = depth;
@@ -121,7 +122,7 @@ if (editable) {
 			}
 		}
 			#endregion
-			if (resizing != noone and device_mouse_check_button(0, mb_left) and name != undefined) {
+			if (resizing != noone and device_mouse_check_button(0, mb_left) and name != undefined and keyboard_check(vk_shift)) {
 				var ele = data.owner.get_child(name);
 				var w = flexpanel_node_style_get_width(ele);
 				w = w.value;

@@ -9,6 +9,12 @@ function window(struct) constructor {
 	editing = false;
 	recalculate();
 	
+	static node_visible = function(n) {
+		var nn = flexpanel_node_get_child(root, n);
+		flexpanel_node_style_set_display(nn, !flexpanel_node_style_get_display(nn));
+		recalculate();
+	}
+	
 	static edit_mode = function() {
 		editing = !editing;
 		for (var i = 0; i < array_length(instances); ++i) {
@@ -292,6 +298,21 @@ function get_align(str) {
 	    case "row-reverse":
 			align = flexpanel_flex_direction.row_reverse
 	        break;
+		case "none":
+			align = flexpanel_display.none;
+			break;
+		case "flex":
+			align = flexpanel_display.flex;
+			break;
+		case "relative":
+			align = flexpanel_position_type.relative;
+			break;
+		case "absolute":
+			align = flexpanel_position_type.absolute;
+			break;
+		case "static":
+			align = flexpanel_position_type.static;
+			break;
 		default:
 			align = -1;
 			break;
@@ -302,128 +323,165 @@ function get_align(str) {
 global.options = [
 	["name", "textbox-char", function(a) {
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_set_name(node, a.text);
+		oUI.editing = a.text;
+		oUI.load_info();
 		oEditableUI.ui.recalculate();
 	}],
 	["width", "textbox", function(a) {
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["height", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["minHeight", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_min_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["maxHeight", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_max_height(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["minWidth", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_min_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["maxWidth", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_max_width(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["padding", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_padding(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["border", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_border(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["alignContent", "listbox", ["flex-start", "flex-end", "stretch", "center", "space-between", "space-around", "space-evenly"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_align_content(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["flex", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_flex(node, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["flexWrap", "listbox", ["no-wrap", "wrap", "wrap-reverse"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_flex_wrap(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["flexDirection", "listbox", ["column", "row", "row-reverse", "column-reverse"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_flex_direction(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["flexBasis", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_flex_basis(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["margin", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_margin(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_align_items(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["alignSelf", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_align_self(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["aspectRatio", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_aspect_ratio(node, a.text);
 		oEditableUI.ui.recalculate();
 	}],
 	["display", "listbox", ["none", "flex"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_display(node, a.text);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_display(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["gap", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_gap(node, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["top", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_position(node, flexpanel_edge.top, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["left", "textbox", function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_position(node, flexpanel_edge.left, a.text, flexpanel_unit.point);
 		oEditableUI.ui.recalculate();
 	}],
 	["justifyContent", "listbox", ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
 		flexpanel_node_style_set_justify_content(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 	["position", "listbox", ["relative", "absolute"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
-		flexpanel_node_style_set_position_type(node, a.text);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_position_type(node, get_align(a.text));
 		oEditableUI.ui.recalculate();
 	}],
 ]
 
+array_sort(global.options, function(e, i) {
+	if (e[1] == "listbox") {
+	    return false;
+	}
+	if (e[0] == "name") {
+	    return false;
+	}
+	return true;
+});
+
 global.inspector = flexpanel_create_node({
     name : "panel_side_ignore",
+	maxWidth : 270,
     flex : 0.2,
 	nodes : [
 		{
