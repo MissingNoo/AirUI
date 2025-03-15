@@ -19,6 +19,13 @@ if (data[$ "text"] != undefined) {
     text = data[$ "text"];
 }
 
+if (data[$ "image"] != undefined) {
+	var spr = asset_get_index(data.image);
+	if (spr != -1 and sprite_exists(spr)) {
+	    image = spr;
+	}
+}
+
 if (string_contains(name, "root")) {
     draw_back = true;
 }

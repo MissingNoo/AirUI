@@ -10,6 +10,24 @@ function window(struct) constructor {
 	startingdepth = 0;
 	recalculate();
 	
+	static set_data = function(node, newdata) { 
+		var olddata = 	flexpanel_node_get_data(flexpanel_node_get_child(root, node));
+		var newnames = variable_struct_get_names(newdata);
+		for (var i = 0; i < array_length(newnames); ++i) {
+		    olddata[$ newnames[i]] = newdata[$ newnames[i]];
+		}
+		recalculate();
+	}
+	
+	static set_inst_data = function(node, newdata) { 
+		var olddata = 	flexpanel_node_get_data(flexpanel_node_get_child(root, node));
+		var newnames = variable_struct_get_names(newdata);
+		for (var i = 0; i < array_length(newnames); ++i) {
+		    olddata[$ newnames[i]] = newdata[$ newnames[i]];
+		}
+		recalculate();
+	}
+	
 	static node_visible = function(n) {
 		var nn = flexpanel_node_get_child(root, n);
 		flexpanel_node_style_set_display(nn, !flexpanel_node_style_get_display(nn));

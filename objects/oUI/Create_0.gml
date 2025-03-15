@@ -389,6 +389,114 @@ saveas = {
   "height":1080.0,
   "name":"base"
 }
+
+setspr = {
+  "nodes":[
+    {
+      "nodes":[
+        {
+          "nodes":[
+            {
+              "flex":1.0,
+              "padding":0.0,
+              "data":{
+				  text : "Save as"
+              },
+              "name":"window_name_center"
+            }
+          ],
+          "flex":1.0,
+          "name":"panel_52056_trn_transparent",
+          "padding":2.0,
+          "data":{
+          },
+          "height":60.0
+        },
+        {
+          "nodes":[
+            {
+              "flex":1.0,
+              "data":{
+              },
+              "name":"textbox_filename_char"
+            }
+          ],
+          "flex":1.0,
+          "name":"panel_transparent",
+          "padding":5.0,
+          "data":{
+          },
+          "height":60.0
+        },
+        {
+          "alignContent":"center",
+          "nodes":[
+            {
+              "flex":0.0,
+              "name":"button_accept",
+              "alignItems":"center",
+              "width":80.0,
+              "data":{
+				  text : "Set",
+				  f : function() {
+					  oEditableUI.ui.set_data(oUI.last_edit, {image : oUI.setsprui.get_element_data("textbox_filename_char", "text")});
+					  oUI.setsprui.dispose();
+				  }
+              },
+              "height":40.0,
+              "alignSelf":"center"
+            },
+            {
+              "flex":1.0,
+              "name":"panel_27108_transparent",
+              "padding":10.0,
+              "width":60.0,
+              "data":{
+              },
+              "height":60.0
+            },
+            {
+              "flex":0.0,
+              "name":"button_cancel",
+              "width":80.0,
+              "data":{
+				  text : "Cancel",
+				  f : function() {
+					  oUI.setsprui.dispose();
+				  }
+              },
+              "height":40.0,
+              "alignSelf":"center"
+            }
+          ],
+          "flex":1.0,
+          "name":"bpanel_transparent",
+          "alignItems":"center",
+          "padding":10.0,
+          "data":{
+          },
+          "height":60.0,
+          "alignSelf":"center",
+          "flexDirection":"row"
+        }
+      ],
+      "name":"panel_base2",
+      "left":760.0,
+      "padding":0.0,
+      "top":455.0,
+      "width":400.0,
+      "data":{
+      },
+      "height":170.0
+    }
+  ],
+  "width":1920.0,
+  "data":{
+  },
+  "height":1080.0,
+  "name":"base"
+}
+
 top = {
   "width":1920.0,
   "data":{
@@ -512,6 +620,19 @@ top = {
 			}
           },
           "name":"button_reload"
+        },
+		{
+          "width":60.0,
+          "data":{
+            text : "Sprite",
+			f : function() {
+				oUI.setsprui = new window(oUI.setspr);
+				oUI.setsprui.startingdepth = -1000;
+				oUI.setsprui.dispose();
+				oUI.setsprui.recalculate();
+			}
+          },
+          "name":"button_save_as"
         },
         //{
         //  "width":32.0,
