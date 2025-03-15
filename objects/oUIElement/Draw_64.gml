@@ -1,3 +1,4 @@
+draw_set_color(c_white);
 if (draw_back)
 {
 	draw_sprite_stretched(sButton, bimg, x, y, width, height);

@@ -43,12 +43,31 @@ ui = new window(str);
 new_window = function() {
 	ui.dispose();
 	ui = new window(str);
-	ui.edit_mode(true);
+	ui.edit_mode();
 }
 
-save = function() {
-	var f = file_text_open_write("test");
-	var str = flexpanel_node_get_struct(ui.root);
+clearstr = function(struct) {
+	var names = struct_get_names(struct);
+	if (array_contains(names, "instances")) {
+	    struct_remove(struct, "instances");
+	}
+	if (struct_exists(struct.data, "owner")) {
+	    struct_remove(struct.data, "owner");
+	}
+	if (struct_exists(struct.data, "inst")) {
+	    struct_remove(struct.data, "inst");
+	}	
+	if (array_contains(names, "nodes")) {
+	    array_foreach(struct.nodes, function(e, i) {
+			clearstr(e);
+		});
+	}	
+}
+
+save = function(name = "test") {
+	var f = file_text_open_write(name);
+	var str = variable_clone(flexpanel_node_get_struct(ui.root));
+	clearstr(str);
 	file_text_write_string(f, json_stringify(str, true));
 	file_text_close(f);
 }
@@ -56,6 +75,6 @@ save = function() {
 load = function() {
 	ui.dispose();
 	ui = new window(json_parse(buffer_read(buffer_load("test"), buffer_text)));
-	ui.edit_mode(true);
+	ui.edit_mode();
 }
 

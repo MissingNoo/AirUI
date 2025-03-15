@@ -3,6 +3,10 @@
 if (keyboard_check_released(vk_insert)) {
 	ui.edit_mode(true);
 }
+if (keyboard_check_released(vk_f6)) {
+	ui.dispose();
+	ui.recalculate();
+}
 
 switch (node) {
     case "panel":

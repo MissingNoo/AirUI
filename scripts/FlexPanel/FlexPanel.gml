@@ -7,6 +7,7 @@ function window(struct) constructor {
 	root = flexpanel_create_node(struct);
 	instances = [];
 	editing = false;
+	startingdepth = 0;
 	recalculate();
 	
 	static node_visible = function(n) {
@@ -47,7 +48,7 @@ function window(struct) constructor {
 		if ((struct_exists(_data, "inst") and (is_string(_data.inst) or !instance_exists(_data.inst))) or !struct_exists(_data, "inst"))
 		{
 			// Create instance
-			var _depth2 = _data[$ "options"] != undefined ? -100 + lastdepth : 0;
+			var _depth2 = _data[$ "options"] != undefined ? -100 + lastdepth : startingdepth;
 			if (_depth2 == -100) {
 			    lastdepth++;
 			}
