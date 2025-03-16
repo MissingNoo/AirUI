@@ -1,14 +1,35 @@
 global.edit_mode = false;
 global.edit_node = undefined;
 global.edit_node_owner = undefined;
-function window(struct) constructor {
+function window(struct, _generate = true) constructor {
+	generate = _generate;
 	lastdepth = 0;
 	ownername = struct[$ "name"];
 	root = flexpanel_create_node(struct);
 	instances = [];
 	editing = false;
 	startingdepth = 0;
+	
 	recalculate();
+		
+	static foreach = function(_function, node = undefined) {
+		node ??= root;
+		var pos = flexpanel_node_layout_get_position(node, false);
+		var _name = flexpanel_node_get_name(node);
+		var _data = flexpanel_node_get_data(node);
+		_function(_name, pos, _data);
+		
+		var _children_count = flexpanel_node_get_num_children(node);
+		for (var i = 0; i < _children_count; i++)
+		{
+			var _child = flexpanel_node_get_child(node, i);
+			foreach(_function, _child);
+		}
+	}
+	
+	static set_node_function = function(node, _function) {
+		set_data(node, {f : _function});
+	}
 	
 	static set_data = function(node, newdata) { 
 		var olddata = 	flexpanel_node_get_data(flexpanel_node_get_child(root, node));
@@ -49,6 +70,15 @@ function window(struct) constructor {
 	
 	static get_child = function(node) {
 		return flexpanel_node_get_child(root, node)
+	}
+	
+	static get_child_data = function(node, str = undefined) {
+		if (str != undefined) {
+		    var _data = flexpanel_node_get_data(get_child(node));
+			return _data[$ str];
+		} else {
+			return flexpanel_node_get_data(get_child(node));
+		}
 	}
 	
 	static generate_instance = function(_node, _depth) {
@@ -111,7 +141,9 @@ function window(struct) constructor {
 		target_w = display_get_gui_width();
 		target_h = display_get_gui_height();
 		flexpanel_calculate_layout(root, target_w, target_h, flexpanel_direction.LTR);
-		generate_instance(root, 0);
+		if (generate) {
+		    generate_instance(root, 0);
+		}
 	}
 	
 	static dispose = function() {
@@ -439,6 +471,30 @@ global.options = [
 		flexpanel_node_style_set_margin(node, flexpanel_edge.all_edges, a.text);
 		oEditableUI.ui.recalculate();
 	}],
+	["marginTop", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_margin(node, flexpanel_edge.top, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["marginBottom", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_margin(node, flexpanel_edge.bottom, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["marginLeft", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_margin(node, flexpanel_edge.left, a.text);
+		oEditableUI.ui.recalculate();
+	}],
+	["marginRight", "textbox", function(a){
+		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
+		if (node == undefined) { exit; }
+		flexpanel_node_style_set_margin(node, flexpanel_edge.right, a.text);
+		oEditableUI.ui.recalculate();
+	}],
 	["alignItems", "listbox", ["flex-start", "flex-end", "center", "baseline"], function(a){
 		var node = flexpanel_node_get_child(oEditableUI.ui.root, oUI.last_edit);
 		if (node == undefined) { exit; }
@@ -509,6 +565,7 @@ global.inspector = flexpanel_create_node({
     name : "panel_side_ignore",
 	maxWidth : 270,
     flex : 0.2,
+	data : {image : sButton},
 	nodes : [
 		{
 			name : "inspector-label-center",

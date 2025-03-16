@@ -403,3 +403,11 @@ function string_contains(str, contain){
 	}
 	return false;
 }
+
+function surface_recreate(surf, w, h) {
+	if (!surface_exists(surf)) {
+	    return surface_create(w, h);
+	} else {
+		return surf;
+	}
+}

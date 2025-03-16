@@ -13,8 +13,8 @@
   "name":"oUI",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"AirUI",
+    "path":"folders/AirUI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -41,7 +41,8 @@ if (string_contains(name, "draggable")) {
 
 if (string_contains(name, "panel")) {
 	type = "panel";
-    draw_back = !string_contains(name, "transparent");
+    //draw_back = !string_contains(name, "transparent");
+    draw_back = false;
 	bimg = 1;
 	//name = string_replace(name, "panel", "");
 }
@@ -87,6 +88,9 @@ if (element != undefined) {
     element.position(x, y, x + width, y + height);
 	if (data[$ "selected"] != undefined) {
 	    element.text = data.selected;
+	}
+	if (data[$ "text"] != undefined) {
+	    element.text = data[$ "text"];
 	}
 	//if (type == "listbox") {
 	//    show_message(element);

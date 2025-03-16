@@ -17,7 +17,7 @@ str = {
 				  "padding":0.0,
 				  "width":400.0,
 				  "data":{
-				    "inst":"@ref instance(100002)"
+				    image : sButton,
 				  },
 				  "height":300.0,
 			},
@@ -28,7 +28,7 @@ str = {
 				  "padding":0.0,
 				  "width":400.0,
 				  "data":{
-				    "inst":"@ref instance(100002)"
+				    image : sButton,
 				  },
 				  "height":300.0,
 			}

@@ -379,6 +379,7 @@ saveas = {
       "top":455.0,
       "width":400.0,
       "data":{
+		  image : sButton
       },
       "height":170.0
     }
@@ -486,6 +487,7 @@ setspr = {
       "top":455.0,
       "width":400.0,
       "data":{
+		  image : sButton
       },
       "height":170.0
     }
@@ -500,6 +502,7 @@ setspr = {
 top = {
   "width":1920.0,
   "data":{
+	image : sButton,
     "owner":{
       "target_w":1920.0,
       "target_h":1080.0,
@@ -517,7 +520,7 @@ top = {
     },
     "inst":"@ref instance(100085)"
   },
-  "height":1080.0,
+  "height":35.0,
   "name":"base",
   "nodes":[
     {
@@ -627,6 +630,11 @@ top = {
             text : "Sprite",
 			f : function() {
 				oUI.setsprui = new window(oUI.setspr);
+				var _data = oUI.setsprui.get_child_data("textbox_filename_char");
+				var spr = oEditableUI.ui.get_child_data(oUI.last_edit, "image");
+				if (spr != undefined) {
+				    _data.text = spr;
+				}
 				oUI.setsprui.startingdepth = -1000;
 				oUI.setsprui.dispose();
 				oUI.setsprui.recalculate();
@@ -672,7 +680,7 @@ str = {
   "width":1920.0,
   "top" : 35,
   "data":{
-    "inst":"@ref instance(100002)"
+    image : wall4,
   },
   "height":1080 - 35,
     flexDirection : "row",
@@ -686,6 +694,7 @@ str = {
     name : "panel_side",
 	maxWidth : 30,
     flex : 0.15,
+	data : {image : sButton},
 nodes : [
     {
       "padding":10.0,

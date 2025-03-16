@@ -45,8 +45,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"UI",
-    "path":"folders/Sprites/UI.yy",
+    "name":"AirUI",
+    "path":"folders/AirUI.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

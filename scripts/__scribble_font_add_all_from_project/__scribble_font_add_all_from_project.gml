@@ -15,7 +15,7 @@ function __scribble_font_add_all_from_project()
         
         var _skip = false;
         
-        var _tagArray = asset_get_tags(_fontArray[_i]);
+        var _tagArray = asset_get_tags(_fontArray[_i], asset_font);
         var _j = 0;
         repeat(array_length(_tagArray))
         {
