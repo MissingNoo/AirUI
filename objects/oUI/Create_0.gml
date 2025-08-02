@@ -1,3 +1,4 @@
+global.filename = "test.ui";
 depth = -2000;
 up = false;
 down = false;
@@ -112,7 +113,7 @@ save = {
                   "data":{
 					  text : "Yes",
 					  f : function() {
-						  oEditableUI.save();
+						  oEditableUI.save(global.filename);
 						  oUI.saveui.dispose();
 					  },
                     "owner":{

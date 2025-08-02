@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"BLANK GAME_3",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -37,6 +37,7 @@
     {"$GMFolder":"","%Name":"Superfonts","folderPath":"folders/Scribble/Superfonts.yy","name":"Superfonts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Scripts","folderPath":"folders/Scripts.yy","name":"Scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"GUI","folderPath":"folders/Sprites/GUI.yy","name":"GUI","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"UI","folderPath":"folders/Sprites/UI.yy","name":"UI","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
@@ -46,7 +47,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1300.0.775",
+    "IDEVersion":"2024.1400.0.849",
   },
   "name":"BLANK GAME_3",
   "resources":[
@@ -57,8 +58,7 @@
     {"id":{"name":"oEditableUI","path":"objects/oEditableUI/oEditableUI.yy",},},
     {"id":{"name":"oUI","path":"objects/oUI/oUI.yy",},},
     {"id":{"name":"oUIElement","path":"objects/oUIElement/oUIElement.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
+    {"id":{"name":"rUIEditor","path":"rooms/rUIEditor/rUIEditor.yy",},},
     {"id":{"name":"__scribble_class_element","path":"scripts/__scribble_class_element/__scribble_class_element.yy",},},
     {"id":{"name":"__scribble_class_event","path":"scripts/__scribble_class_event/__scribble_class_event.yy",},},
     {"id":{"name":"__scribble_class_font","path":"scripts/__scribble_class_font/__scribble_class_font.yy",},},
@@ -185,6 +185,9 @@
     {"id":{"name":"sBlank","path":"sprites/sBlank/sBlank.yy",},},
     {"id":{"name":"sButton","path":"sprites/sButton/sButton.yy",},},
     {"id":{"name":"scribble_fallback_bulletpoint","path":"sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy",},},
+    {"id":{"name":"sDialogAnswer","path":"sprites/sDialogAnswer/sDialogAnswer.yy",},},
+    {"id":{"name":"sDialogWindow","path":"sprites/sDialogWindow/sDialogWindow.yy",},},
+    {"id":{"name":"sDialogWindow2","path":"sprites/sDialogWindow2/sDialogWindow2.yy",},},
     {"id":{"name":"sInput","path":"sprites/sInput/sInput.yy",},},
     {"id":{"name":"Sprite3","path":"sprites/Sprite3/Sprite3.yy",},},
     {"id":{"name":"test","path":"sprites/test/test.yy",},},
@@ -193,8 +196,7 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"roomId":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
+    {"roomId":{"name":"rUIEditor","path":"rooms/rUIEditor/rUIEditor.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

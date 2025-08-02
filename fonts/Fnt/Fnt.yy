@@ -205,8 +205,8 @@
   "maintainGms1Font":false,
   "name":"Fnt",
   "parent":{
-    "name":"Fonts",
-    "path":"folders/Fonts.yy",
+    "name":"AirUI",
+    "path":"folders/AirUI.yy",
   },
   "pointRounding":0,
   "ranges":[
@@ -223,7 +223,10 @@
   "tags":[
     "test",
   ],
-  "textureGroupId":null,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
   "TTFName":"",
   "usesSDF":false,
 }
